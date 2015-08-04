@@ -1,0 +1,7 @@
+<div class="fields image-fields" >
+  <%= f.label "图片文件"%>
+  <%= f.file_field :photo, "accept" => "image/*", :onchange=>"previewImage(this)" %>
+  <img src="" alt="" style="margin: 10px 0;max-height: 140px;"/><br />
+  <%= f.hidden_field :image_string, :value => "" %>
+  <%= link_to_remove_fields "删除", f %>
+</div>

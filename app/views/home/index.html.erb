@@ -1,0 +1,415 @@
+<div class="mainbody-grey">
+<div class="container home-container xs-no-padding" ng-controller="homeController">
+	<!--左侧部分-->
+	<div class="col-sm-8 col-xs-12 col-md-8 no-padding pull-left">
+	<div class="home-left-part" style="float: left; width: 100%;">
+		<!--顶部图片轮播-->
+		<% if (@carousels.present?) then %>
+		<div class="home-module top-pic-module pull-left">
+			<div class="col-sm-12 col-md-12 no-padding" style="">
+				<div id="slider" class="swipe" style="width:100%">
+					<!--图片部分-->
+					<div class="swipe-wrap">
+						<% @carousels.each do |carousel| %>
+						<div <%if carousel.path.present?%>ng-click="changeHref('<%=carousel.path %>');" class="pointer"<%end%>>
+							<%= image_tag carousel.photo.url(:medium), onerror:'this.src="/assets/default.png"'%>
+							<div class="img-title"><%=carousel.get_title%></div>
+						</div>
+						<% end %>
+					</div>
+					<!--图片部分 End-->
+					<!--下面的点s-->
+					<nav class="swipeNav">
+						<ul id="dots">
+							<% @carousels.each do |carousel| %>
+							<li class="<%= (@carousels.first == carousel)?'on':''%>"></li>
+							<% end %>
+						</ul>
+					</nav>
+					<!--下面的点s End-->
+					<!--左右箭头-->
+					<ul class="swipe-direction-nav">
+						<li>
+							<a class="swipe-prev" onclick="mySwipe.prev()">Previous</a>
+						</li>
+						<li>
+							<a class="swipe-next" onclick="mySwipe.next()">Next</a>
+						</li>
+					</ul>
+					<!--左右箭头 End-->
+				</div>
+			</div>
+		</div>
+		<% end %>
+		<!--顶部图片轮播 End-->
+		<!--个人中心-->
+		<div class="home-module pull-left center-module hidden">
+			<div class="module-title">
+				<div class="module-title-container">
+					<span class="black-span-text">个人中心</span>
+					<a href="#"><span class="module-title-more">More...</span></a>
+				</div>
+			</div>
+			<div class="center-module-container">
+				<div class="pull-left center-module-image">
+					<img src="/assets/center_icon.png">
+				</div>
+				<div class="pull-left center-module-content">
+					<div class="center-module-content-name">费德勒</div>
+					<div class="center-module-content-club">
+						<span>苏州工业园区网球协会 · </span>
+						<span>MASS TENNIS</span>
+					</div>
+					<div class="center-module-content-msg">
+						<div class=" pull-left center-module-content-msg-ico">
+							<span class="glyphicon glyphicon-envelope"></span>
+						</div>
+						<span>5条未读通知</span>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<!--个人中心 End-->
+		<!--新闻-->
+		<div class="home-module news-module pull-left">
+			<div class="module-title">
+				<div class="module-title-container">
+					<span  class="black-span-text">新闻</span>
+					<a href="<%=news_index_path%>" ><span class="module-title-more">More...</span></a>
+				</div>
+			</div>
+			<div class="new-module-container">
+				<% @news.each do |news| %>
+				<a href="<%=news_path(news)%>" >
+					<div class="new-module">
+						<div class="new-module-image">
+							<% if news.images.present? %>
+							<%=image_tag news.images.first.photo.url(:thumb), onerror:'this.src="/assets/default.png"'%>
+							<% else %>
+							<%=image_tag "default.png"%>
+							<% end %>
+						</div>
+						<div class="new-module-content">
+							<p class="new-module-content-title"><%= news.title %></p>
+							<p class="new-module-content-sum"><%= news.show_body %></p>
+							<% if news.show_news_time.present? %>
+							<div class="new-module-time new-module-time-home">
+								<%= news.show_news_time %>
+							</div>
+							<% end %>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</a>
+				<% end %>
+			</div>
+		</div>
+		<!--新闻 End-->
+		<!--赛事-->
+		<% if (@competitions.present?) then %>
+		<div class="home-module competitions-module pull-left">
+			<div class="module-title">
+				<div class="module-title-container">
+					<span  class="black-span-text">赛事</span>
+					<!--<a href="#"><span class="module-title-more">More...</span></a>-->
+					<!-- <a href="<%=competitions_path%>" ><span class="module-title-more">More...</span></a> -->
+				</div>
+			</div>
+			<div class="competitions-module-container">
+				<%@count = 0%>
+				<% @competitions.each do |competition| %>
+					<%@count = @count + 1%>
+    				<a href="<%=competition_path(competition)%>">
+    					<!-- <div class="col-xs-4 col-sm-3 col-md-3 competition-module">
+    						<div class="competition-module-image">
+    							<%= image_tag competition.image.url, onerror:'this.src="/assets/default_club.png"'%>
+    						</div>
+    						<div class="competition-module-name"><%=competition.name%></div>
+    					</div> -->
+    					<div class="new-module competition-module-lg col-xs-12">
+    					    <div class="competition-module-image">
+                                <% if competition.image.present? %>
+                                    <%=image_tag competition.image.url, onerror:'this.src="/assets/default_competition.png"'%>
+                                <% else %>
+                                    <%=image_tag "default_competition.png"%>
+                                <% end %>
+                            </div>
+                            <div class="new-module-content competition-module-content">
+                                <p class="new-module-content-title home_competition_title"><%= competition.name %></p>
+                                <p class="new-module-content-sum home_competition_address"><%= competition.address%></p>
+                                <p class="new-module-content-sum home_competition_time"><%= competition.competition_time %></p>
+                                <div class="clearfix"></div>
+                            </div>
+    				        <div class="clearfix"></div>
+    				    </div>
+    				    <div class="clearfix"></div>
+    				    <%if @count < @competitions.length%>
+    				    <div style="height: 1px; background-color: #f9f9f9;">
+    				    	<div style="height: 1px; background-color: #f87179; margin: 0 15px;"></div>
+    				    </div>
+    				    <%end%>
+    				</a>
+				<% end %>
+				<!-- <div class="hidden-xs">
+					<%if @competitions[6..7].present?%>
+					<% @competitions[6..7].each do |competition| %>
+					<a href="<%=competition_path(competition)%>">
+						<div class="col-xs-4 col-sm-3 col-md-3 competition-module">
+							<div class="competition-module-image">
+								<%= image_tag competition.image.url, onerror:'this.src="/assets/default_competition.png"'%>
+							</div>
+							<div class="competition-module-name"><%=competition.name%></div>
+						</div>
+					</a>
+					<% end %>
+					<% end %>
+				</div> -->
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<% end %>
+		<!--赛事end-->
+		<!--俱乐部-->
+		<% if (@clubs.present?) then %>
+		<div class="home-module clubs-module pull-left">
+			<div class="module-title">
+				<div class="module-title-container">
+					<span  class="black-span-text">俱乐部</span>
+					<!--<a href="#"><span class="module-title-more">More...</span></a>-->
+					<a href="<%=clubs_path%>" ><span class="module-title-more">More...</span></a>
+				</div>
+			</div>
+			<div class="clubs-module-container">
+				<% @clubs[0..5].each do |club| %>
+				<a href="<%=club_path(club)%>">
+					<div class="col-xs-4 col-sm-3 col-md-3 club-module">
+						<div class="club-module-image">
+							<%= image_tag club.logo.url, onerror:'this.src="/assets/default_club.png"'%>
+						</div>
+						<div class="club-module-name"><%=club.name%></div>
+					</div>
+				</a>
+				<% end %>
+				<div class="hidden-xs">
+					<%if @clubs[6..7].present?%>
+					<% @clubs[6..7].each do |club| %>
+					<a href="<%=club_path(club)%>">
+						<div class="col-xs-4 col-sm-3 col-md-3 club-module">
+							<div class="club-module-image">
+								<%= image_tag club.logo.url, onerror:'this.src="/assets/default_club.png"'%>
+							</div>
+							<div class="club-module-name"><%=club.name%></div>
+						</div>
+					</a>
+					<% end %>
+					<% end %>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<% end %>
+		<!--俱乐部 End-->
+		<!--场馆-->
+		<% if (@venues.present?) then %>
+		<div class="home-module venues-module pull-left">
+			<div class="module-title">
+				<div class="module-title-container">
+					<span  class="black-span-text">场馆</span>
+					<!--<a href="#"><span class="module-title-more">More...</span></a>-->
+					<a href="<%=venues_path%>" ><span class="module-title-more">More...</span></a>
+				</div>
+			</div>
+			<div class="venues-module-container">
+				<% @venues[0..5].each do |venue| %>
+				<a href="<%=venue_path(venue)%>">
+					<div class="col-xs-4 col-sm-3 col-md-3 venue-module">
+						<div class="venue-module-image">
+							<%if venue.venue_images.present?%>
+								<%= image_tag venue.venue_images.first.image.url(:thumb), onerror:'this.src="/assets/default_venue.png"'%>
+							<%else%>
+								<%= image_tag venue.logo.url, onerror:'this.src="/assets/default_venue.png"'%>
+							<%end%>
+						</div>
+						<div class="venue-module-name"><%=venue.name%></div>
+					</div>
+				</a>
+				<% end %>
+				<div class="hidden-xs">
+					<%if @venues[6..7].present?%>
+					<% @venues[6..7].each do |venue| %>
+					<a href="<%=venue_path(venue)%>">
+						<div class="col-xs-4 col-sm-3 col-md-3 venue-module">
+							<div class="venue-module-image">
+								<%if venue.venue_images.present?%>
+									<%= image_tag venue.venue_images.first.image.url(:thumb), onerror:'this.src="/assets/default_venue.png"'%>
+								<%else%>
+									<%= image_tag venue.logo.url, onerror:'this.src="/assets/default_venue.png"'%>
+								<%end%>
+							</div>
+							<div class="venue-module-name"><%=venue.name%></div>
+						</div>
+					</a>
+					<% end %>
+					<% end %>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<% end %>
+		<!--场馆 End-->
+		<!--教练-->
+		<% if (@users.present?) then %>
+		<div class="home-module coaches-module pull-left">
+			<div class="module-title">
+				<div class="module-title-container">
+					<span  class="black-span-text">教练</span>
+					<!--<a href="#"><span class="module-title-more">More...</span></a>-->
+					<a href="/coaches" ><span class="module-title-more">More...</span></a>
+				</div>
+			</div>
+			<div class="coaches-module-container">
+				<% @users[0..5].each do |user| %>
+				<div class="col-xs-4 col-sm-3 col-md-3 club-module">
+					<div class="coaches-module-image">
+						<%= image_tag user.profile_picture.url(:small), onerror:'this.src="/assets/default_club.png"'%>
+					</div>
+					<%if user.full_name.present?%>
+						<div class="coaches-module-name"><%=user.full_name%></div>
+					<%else%>
+						<div class="coaches-module-name">暂无</div>
+					<%end%>
+				</div>
+				<% end %>
+				<div class="hidden-xs">
+					<%if @users[6..7].present?%>
+					<% @users[6..7].each do |user| %>
+					<div class="col-xs-4 col-sm-3 col-md-3 club-module">
+						<div class="coaches-module-image">
+							<%= image_tag user.profile_picture.url(:small), onerror:'this.src="/assets/default_club.png"'%>
+						</div>
+						<%if user.full_name.present?%>
+						<div class="coaches-module-name"><%=user.full_name%></div>
+						<%else%>
+						<div class="coaches-module-name">暂无</div>
+						<%end%>
+					</div>
+					<% end %>
+					<% end %>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<% end %>
+		<!--教练 End-->
+		<!--二维码-->
+		<!--
+		<div class="home-module QRCodes-module pull-left hidden-xs">
+			<div class="QRCode-module">
+				<img src="/assets/QRCode.png">
+			</div>
+		</div>
+		-->
+		<!--二维码 End-->
+		<!--左侧footer-->
+		<div class="home-footer-module hidden-xs">
+			<%= render "footer" %>
+		</div>
+		<!--左侧footerEnd-->
+	</div>
+	</div>
+	<!--左侧部分end-->
+	<!--右侧部分-->
+	<div class="home-right-part col-xs-12 col-sm-4 col-md-4 xs-no-padding">
+		<div class="clearfix"></div>
+		<!--球友互动-->
+		<% if @messages.present? %>
+		<div class="home-module friends-module">
+			<div class="module-title">
+				<div class="module-title-container">
+					<span class="black-span-text">球友互动</span>
+					<a href="<%=messages_path%>" ><span class="module-title-more">More...</span></a>
+				</div>
+			</div>
+			<div id="home-friend-module-container" class="friends-module-container home-friend-module-container" >
+				<% @messages.each do |message| %>
+				<div class="friend-module">
+					<div class="friend-module-image">
+						<% if message.message_images.present? %>
+						<%=image_tag message.message_images.first.image.url, onerror:'this.src="/assets/default.png"'%>
+						<% else %>
+						<div class="default-row"></div>
+						<% end %>
+					</div>
+					<div class="pull-left friend-module-picture">
+						<% if message.user.profile_picture.present? %>
+						<%=image_tag message.user.profile_picture_url%>
+						<% else %>
+						<%=image_tag "default_head.png"%>
+						<% end %>
+					</div>
+					<div class="pull-left friend-module-name" title="<%=message.user.full_name%>" ><%=message.user.full_name%></div>
+					<div class="pull-left friend-module-club"></div>
+					<div class="pull-right friend-module-time"><%=message.create_time_show%></div>
+					<div class="clearfix"></div>
+					<div class="friend-module-sum"><%=message.body%></div>
+				</div>
+				<div class="clearfix"></div>
+				<% end %>
+				<!-- <div id="moreBtn" class="info-box alert-warning" style="cursor: pointer;" onclick="getMessages();">加载更多...</div> -->
+			</div>
+		</div>
+		<% end %>
+		<!--球友互动 End-->
+	</div>
+	
+	<div class="home-footer-module show-xs hidden" >
+		<%= render "footer" %>
+	</div>
+	<!--右侧部分end-->
+</div>
+</div>
+<script>
+	//绑定滚动事件
+	// $('#home-friend-module-container').scroll(function(){
+	// var nScrollHeight = $(this)[0].scrollHeight;
+	// var nScrollTop = $(this)[0].scrollTop;
+	// var nDivHeight = $('#home-friend-module-container').height();
+	// if(nScrollTop + nDivHeight >= nScrollHeight){
+		// if( hasMore ){
+			// getMessages();
+		// }
+	// };
+// });
+// 	
+	$(window).scroll(function(){
+		var nScrollHeight = $(document).height();
+		var nScrollTop = $(window).scrollTop();
+		var nWindowHeight = $(window).height();
+		var leftPartHeight = $('.home-left-part').height();
+		// var nWindowWidth = $(window).width();
+		var nWindowWidth = window.innerWidth;
+		//根据屏幕宽度判断是否是手机端 
+		if( nWindowWidth > 767 && nScrollTop + nWindowHeight - ( leftPartHeight + $('#innerHeadBar').height()+50 ) >= 0 ){
+			var leftPartWidth = $('.container').width()*(2/3);
+			$('.home-left-part').css({'width' : leftPartWidth, 'position':'fixed', 'bottom':'0'});
+		}else{
+			$('.home-left-part').css({'width':'100%', 'float': 'left', 'position':''});
+		}
+		//判断是否显示顶部“球友互动”
+		if( nWindowWidth > 767 && nScrollTop - $('#innerHeadBar').height() - 20 - 50 >= 0){
+			$('#fakeHeadBar').css('display','block');
+		}else{
+			$('#fakeHeadBar').css('display','none');
+		}
+		//滚到底端获取更多消息
+		if(nScrollTop + nWindowHeight >= nScrollHeight){
+			if( hasMore ){
+				getMessages();
+			}
+		};
+	});
+	
+	
+</script>

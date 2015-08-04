@@ -1,0 +1,96 @@
+<div class="container news-container xs-no-padding" ng-controller="editProfileController">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>俱乐部注册</span>
+		</div>
+	</div>
+	<div id="noticeArea">
+		<% if flash[:notice].present? %>
+		<div class="info-box alert-success">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice]%></span>
+		</div>
+		<% end %>
+		
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @club.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= @club.errors.messages.first[1][0] %></span>
+			</div>
+		<% end %>
+	</div>
+	<!-- 主体部分 -->
+	<div class="edit-main-part" id="edit-main-part">
+		<%= form_for @club, url: {action: "create"} do |f| %>
+		<!-- 左边部分 -->
+		<div class="edit-left-part col-xs-12 col-sm-8 no-padding">	
+			<div class="edit-club-notification center">
+				<p>提示：只有俱乐部负责人才可以注册俱乐部。</p>
+			</div>
+			<div class="edit-row">
+		    	<span class="edit-label col-xs-4 col-sm-3 xs-no-padding">俱乐部名称</span>
+		    	<div class="col-xs-8 col-sm-9" id="nameArea" data-toggle="tooltip" title="请输入俱乐部名称！" data-placement="top" data-animation="true" data-trigger="manual">
+		    		<%= f.text_field :name,:class => "form-control","maxLength" => "30", :id => "nameInput" %>
+		  		</div>
+		  	</div>
+		  	<div class="edit-row">
+		    	<span class="edit-label col-xs-4 col-sm-3 xs-no-padding">俱乐部负责人</span>
+		    	<div class="col-xs-8 col-sm-9" id="directorArea" data-toggle="tooltip" title="请输入负责人！" data-placement="top" data-animation="true" data-trigger="manual">
+		    		<input class="form-control ng-pristine ng-valid" type="text" value="<%=(@user.full_name if @user.present?)%>" readonly="true"">
+		  		</div>
+		  	</div>
+		 	<div class="edit-row edit-sm-border-bottom">
+				<span class="edit-label col-xs-4 col-sm-3 xs-no-padding">俱乐部介绍</span>
+				<div class="col-xs-8 col-sm-9 edit-text-area" id="introductionArea" data-toggle="tooltip" title="请输入俱乐部介绍！" data-placement="top" data-animation="true" data-trigger="manual">
+		    		<%= f.text_area :introduction, :class => "form-control edit-text-area", "maxlength" => "{{maxLength}}", :id => "introductionInput" %>
+		  		</div>
+		  	</div>
+		 	<div class="edit-row">
+		    	<span class="edit-label col-xs-4 col-sm-3 xs-no-padding">主要活动场地</span>
+		    	<div class="col-xs-8 col-sm-9" id="fieldArea" data-toggle="tooltip" title="请输入俱乐部主要活动场地！" data-placement="top" data-animation="true" data-trigger="manual">
+		    		<%= f.text_field :field,:class => "form-control","maxLength" => "30", :id => "fieldInput" %>
+		  		</div>
+		  	</div>
+		  	<div class="edit-row">
+		    	<span class="edit-label col-xs-4 col-sm-3 xs-no-padding">会员资格</span>
+		    	<div class="col-xs-8 col-sm-9" id="membershipArea" data-toggle="tooltip" title="请输入俱乐部会员资格！" data-placement="top" data-animation="true" data-trigger="manual">
+		    		<%= f.text_field :membership,:class => "form-control","maxLength" => "30", :id => "membershipInput" %>
+		  		</div>
+		  	</div>
+		  	<div class="edit-row">
+		    	<span class="edit-label col-xs-4 col-sm-3 xs-no-padding">联系电话</span>
+		    	<div class="col-xs-8 col-sm-9" id="phoneArea" data-toggle="tooltip" title="请输入俱乐部联系电话！" data-placement="top" data-animation="true" data-trigger="manual">
+		    		<%= f.text_field :phone,:class => "form-control","maxLength" => "30", :id => "phoneInput" %>
+		  		</div>
+		  	</div>
+	  	</div>
+	  	<!-- 左边部分 end-->
+	  	
+	  	<!-- 右边部分 -->
+	  	<div class="edit-right-part center col-xs-12 col-sm-4">
+	  		<div class="edit-right-part-wrapper">
+	  			<img id="profile-head-img" class="edit-head-img" src="/assets/upload_club_icon.png" alt="" />
+	  		</div>
+	  		<!-- <div class="edit-right-part-wrapper">
+	  			<div class="login-valid edit-upload">本地上传</div>
+	  		</div> -->
+	  		<div class="edit-right-part-wrapper">
+	  			<div class="edit-upload">本地上传</div>
+	  			<%= f.file_field :logo, :id => "imgFile", :class => "edit-file-input", :onchange => "previewImage(this);", "accept" => "image/*", :style => "display:inline;" %>
+	  			<p>仅支持jpg、png格式，文件需小于512KB</p>
+	  		</div>
+	  		
+	  	</div>
+	  	<!-- 右边部分 end-->
+  	</div>
+  	<!-- 主体部分 end -->
+	<div class=" center col-xs-12">
+    	<%= f.submit "注册", :class =>"edit-submit", :onclick => "return registerClubValidate();" %>
+  	</div>
+	<% end %>
+</div>

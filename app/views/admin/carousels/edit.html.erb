@@ -1,0 +1,49 @@
+<div id="admin-container"class="admin-container" data-type="carousels">
+	<!-- 信息提示区域 -->
+	<div id="noticeArea">
+		<% if flash[:notice] %>
+		<div class="info-box alert-danger">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice] %></span>
+		</div>
+		<% end %>
+		
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @carousel.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= @carousel.errors.messages.first[1][0] %></span>
+			</div>
+		<% end %>
+	</div>
+	<!-- 信息提示区域 end-->
+	<div class="widget">
+		<div class="widget-header bordered-bottom bordered-blue">
+			<span class="widget-caption"><%=((@title.blank?)?"":@title) %></span>
+		</div>
+		<div class="widget-body">
+			<%= form_for @carousel, url: {action: "update"}, method: "put"  do |f| %>
+				<div class="form-group">
+					<label>标题<span class="red-hint">(必填)</span></label>
+					<%= f.text_field :title, :class => "form-control", "maxlength" => "255" %>
+			  	</div>
+			  	<div class="form-group">
+					<label>路径<span class="red-hint">(必填)</span></label>
+					<%= f.text_field :path, :class => "form-control", "maxlength" => "255" %>
+			  	</div>
+			  	<div class="form-group">
+			  		<%= f.file_field :photo, :onchange=>"previewImage(this)" %>
+			  		<%= image_tag(@carousel.photo.url, :class=>"admin_square_image", :id=>"uploadImage")%>
+			  		<div class="clearfix"></div>
+			  	</div>
+			  	<div class="form-group">
+			  		<%= f.submit "保存",:class => "btn btn-blue" %>
+			  	</div>
+			<% end %>
+		</div>
+	</div>
+</div>

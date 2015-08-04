@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>苏州工业园区网球协会</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= stylesheet_link_tag "admin/application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!--[if lte IE 8]><script>window.location.href='<%=error_browser_path%>'</script><![endif]-->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag "common/html5shiv.min" %>
+      <%= javascript_include_tag "common/response.min" %>
+    <![endif]-->
+</head>
+<body class="admin">
+
+<div>
+<!-- Header Section -->
+<%= render 'layouts/admin_header' %>
+<!-- Header Section -->
+<!-- 0:用户管理；1：新闻管理；2：帖子管理；3；场馆刮泥；4：俱乐部管理；5：头图管理 -->
+<div class="main-container container-fluid">
+	<div class="page-container">
+		<!-- Left Menu -->
+		<%= render 'layouts/admin_slidebar' %>
+		<!-- Left Menu -->
+		<div class="page-content">
+			<div id="noticeArea">
+				<% if flash[:notice] %>
+				<div class="info-box alert-success">
+					<a href="#" class="close" data-dismiss="alert"> &times; </a>
+					<span><%= flash[:notice] %></span>
+				</div>
+				<%elsif flash[:error]%>
+				<div class="info-box alert-danger">
+					<a href="#" class="close" data-dismiss="alert"> &times; </a>
+					<span><%= flash[:error] %></span>
+				</div>
+				<% end %>
+			</div>
+			<!--页面位置-->
+			<div class="page-breadcrumbs">
+				<ul class="breadcrumb">
+					<li>
+						<i class="fa fa-home"></i>
+						<a href="/admin/users">首页</a>
+					</li>
+					<li>
+						<a id="admin-right-sub-title-1" href="#"></a>
+					</li>
+					<li id="admin-right-sub-title-li-2" style="display: none;">
+						<a id="admin-right-sub-title-2" href="#"></a>
+					</li>
+					<% if !@title.blank? %>
+						<li><%= @title %></li>
+					<% end %>
+				</ul>
+			</div>
+			<!--页面位置 End-->
+			<!--Page Header-->
+			<div class="page-header position-relative">
+				<div class="header-title">
+					<h1><%=((@title.blank?)?"":@title) %></h1>
+				</div>
+				<div class="header-buttons">
+					<!--<a class="sidebar-toggler" href="#">
+						<i class="fa fa-arrows-h"></i>
+					</a>-->
+					<a id="refresh-toggler" class="refresh" href="">
+						<i class="glyphicon glyphicon-refresh"></i>
+					</a>
+					<!-- <a id="fullscreen-toggler" class="fullscreen" href="#">
+						<i class="glyphicon glyphicon-fullscreen"></i>
+					</a> -->
+				</div>
+			</div>
+			<!--Page Header End-->
+			<div class="page-body">
+				<%= yield %>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Footer Section -->
+<div class="fix-footer-bug"></div>
+<%= render 'layouts/admin_footer' %>
+<!-- Footer Section -->
+</div>
+
+<!-- Loading -->
+<div>
+	<div class="yl-loading yl-loading-bg"></div>
+	<img class="yl-loading yl-loading-img" src="/assets/YL_loading.png">
+</div>
+<!-- Loading End -->
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<div class="container news-container xs-no-padding" ng-controller="editProfileController">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>会员缴纳年费</span>
+		</div>
+	</div>
+	<div id="noticeArea">
+		<% if flash[:notice].present? %>
+		<div class="info-box alert-success">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice]%></span>
+		</div>
+		<% end %>
+		
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @order.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= @order.errors.messages.first[1][0] %></span>
+			</div>
+		<% end %>
+	</div>
+	<!-- 主体部分 -->
+	<div class="edit-main-part" id="edit-main-part">
+		<%= form_for @order, url: {action: "create"} do |f| %>
+		<!-- 左边部分 -->
+		<div class="edit-left-part col-xs-12 col-sm-12 no-padding">	
+		  	<div class="edit-row">
+		    	<span class="edit-label col-xs-3 col-sm-2 xs-no-padding">姓名</span>
+		    	<div class="col-xs-9 col-sm-5">
+		    		<input class="form-control" type="text" value="<%=(@user.full_name if @user.present?)%>" readonly="true"">
+		  		</div>
+		  	</div>
+		 	<div class="edit-row">
+		    	<span class="edit-label col-xs-3 col-sm-2 xs-no-padding">费用</span>
+		    	<div class="col-xs-9 col-sm-5">
+		    		<input class="form-control" type="text" value="<%=Commodity.get_annual_fee%>元" readonly="true"">
+		  		</div>
+		  	</div>
+		  	<div class="edit-row">
+		    	<span class="edit-label col-xs-3 col-sm-2 xs-no-padding">有效期至</span>
+		    	<div class="col-xs-9 col-sm-5">
+		    		<input class="form-control" type="text" value="<%=@expire_time%>" readonly="true"">
+		  		</div>
+		  	</div>
+	  	</div>
+	  	<!-- 左边部分 end-->
+	  	
+  	</div>
+  	<!-- 主体部分 end -->
+	<div class=" center col-xs-12 no-padding">
+		<div class="col-xs-2 col-sm-5"></div>
+    	<%= f.submit "支付", :class =>"pay-submit col-xs-8 col-sm-2" %>
+    	<div class="col-xs-2 col-sm-5"></div>
+  	</div>
+	<% end %>
+</div>

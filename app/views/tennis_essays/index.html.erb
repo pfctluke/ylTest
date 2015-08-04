@@ -1,0 +1,27 @@
+<div class="container news-container xs-no-padding">
+	<div class="list-module news-module no-border">
+		<div class="module-title">
+			<div class="module-title-container">
+				<span>我的网球故事</span>
+			</div>
+		</div>
+		<div class="new-module-container">
+			<% @tennis_essays.each do |essay| %>
+			<a href="<%=tennis_essays_path%>/<%=essay.id %>">
+				<div class="new-module">
+					<% if essay.show_contribute_time.present? %>
+					<div class=" pull-right essay-module-time">
+						<p><%= essay.show_contribute_time %></p>
+					</div>
+					<% end %>
+					<div class="new-module-content">
+						<p class="new-module-content-title essay-module-content-title"><%= essay.title %><span class="new-module-content-sum a-line essays-author"><%=essay.author%><%= essay.get_author_des%></span></p>
+						<p class="new-module-content-sum a-line"><%= essay.get_summary %></p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+			<% end %>
+		</div>
+	</div>
+</div>

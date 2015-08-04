@@ -1,0 +1,67 @@
+<div id="admin-container"class="admin-container" data-type="orders">
+	<div class="col-xs-5 pull-right order_search_line">
+		<%= form_tag( '/admin/orders/change_annual_fee', :method => :post ) do %>
+		<label class="col-xs-3 no-padding" style="line-height: 34px; text-align: right;">年费金额：</label>
+		<div class="col-xs-6 no-padding">
+			<input class="form-control order_search_input" name="annual_fee" placeholder="请输入年费金额" value="<%=Commodity.get_annual_fee%>" />
+		</div>
+		<%= button_tag "修改", :name => nil, :class => "btn btn-default col-xs-3", :style => "color: #000; min-height: 34px; line-height: 20px;" %>
+		<div class="clearfix"></div>
+		<% end %>
+	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue"><%=((@title.blank?)?"":@title) %></div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>交易号</th>
+						<th>项目</th>
+						<th>总价</th>
+						<th>下单时间</th>
+						<th>用户姓名</th>
+						<th>手机号</th>
+						<th>状态</th>
+						<th style="min-width: 60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @orders.each do |order| %>
+					<tr>
+						<td><%= order.id %></td>
+						<td><%= order.trade_no %></td>
+						<td><%= order.subject%></td>
+						<td><%= order.total_fee %></td>
+						<td>
+							<%if order.created_at.present?%>
+							<%= order.created_at.strftime('%Y-%m-%d %H:%M:%S')%>
+							<%end%>
+						</td>
+						<td>
+							<% if order.user.present?%>
+							<%= order.user.full_name%>
+							<%end%>
+						</td>
+						<td>
+							<%if order.user.present?%>
+							<%= order.user.phone%>
+							<%end%>
+						</td>
+						<td><%= order.show_status%></td>
+						<td>
+							<a href=<%=admin_order_path(order)%> class="btn btn-default" style="color: #000">查看</a>
+							<%if order.status == 0%>
+							<a href=<%= admin_order_path(order)%> class="btn btn-default" data-confirm="确定删除订单？" style="color: #000" data-method="delete" rel="nofollow">删除</a>
+							<%end%>
+						</td>
+					</tr>
+				<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%= will_paginate @orders, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+			</div>
+		</div>
+	</div>
+</div>

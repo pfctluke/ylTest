@@ -1,0 +1,38 @@
+<div id="admin-container"class="admin-container" data-type="messages">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue"><%=((@title.blank?)?"":@title) %></div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>内容</th>
+						<th>用户</th>
+						<th>创建时间</th>
+						<th style="min-width: 60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @messages.each do |message| %>
+					<tr>
+						<td><%= message.id %></td>
+						<% if message.body.present? %>
+							<td><a href="<%= admin_message_path(message) %>"><%= message.body %></a></td>
+						<% else %>
+							<td><a href="#"></a></td>
+						<% end %>
+						<td class="username"><%= message.user.full_name if message.user.present? %></td>
+						<td><%= ((message.created_at.present?)?message.created_at.strftime('%F'):"") %></td>
+						<td>
+							<%= link_to '', admin_message_path(message), method: :delete, data: { confirm: '确定删除?' }, :class => "icon-trash2 icon-delete" %>
+						</td>
+					</tr>
+				<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%= will_paginate @messages, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,44 @@
+/* Bootstrap overrides */
+p{
+	color: #666666;
+}
+.navbar{
+	margin-bottom: 0px;
+}
+.icon-bar{
+	background-color: #FFFFFF;
+	margin-right: 0px;
+}
+.collapsed{
+	margin-right: 0px;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{
+	color: #fdb900;
+}
+button[disabled], html input[disabled]{
+	opacity: 0.5;
+}
+
+.no-border{
+	border: none;
+}
+textarea.form-control {
+    height: 100%;
+}
+
+.side-bar-name {
+    color: #FDB900;
+}
+/* Bootstrap overrides End */
+
+/* Jquery mmenu overrides */
+html.mm-right.mm-opening .mm-page, html.mm-right.mm-opening #mm-blocker {
+    transform: translate(-50%, 0px);
+    -webkit-transform: translate(-50%, 0);
+}
+.mm-menu {
+    width: 50%;
+}
+/* Jquery mmenu overrides End */
+
+/*  */

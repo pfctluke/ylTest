@@ -1,0 +1,101 @@
+<div class="container news-container xs-no-padding">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>场馆详情</span>
+		</div>
+	</div>
+	<div class="show-main-part-no-border">
+		<%if @venue.venue_images.present?%>
+		<div class="show-venue-left-part center col-xs-12 col-sm-5">
+			<% if (@venue.venue_images.present?) then %>
+			<div id="slider" class="swipe">
+				<!--图片部分-->
+				<div class="swipe-wrap">
+					<% @venue.venue_images.each do |image| %>
+					<div>
+						<%= image_tag image.image.url(:medium), onerror:'this.src="/assets/default.png"'%>
+					</div>
+					<% end %>
+				</div>
+				<!--图片部分 End-->
+				<!--下面的点s-->
+				<nav class="swipeNav">
+					<ul id="dots">
+						<% @venue.venue_images.each do |image| %>
+						<li class="<%= (@venue.venue_images.first == image)?'on':''%>"></li>
+						<% end %>
+					</ul>
+				</nav>
+				<!--下面的点s End-->
+				<!--左右箭头-->
+				<ul class="swipe-direction-nav">
+					<li>
+						<a class="swipe-prev" onclick="mySwipe.prev()" tabindex="-1">Previous</a>
+					</li>
+					<li>
+						<a class="swipe-next" onclick="mySwipe.next()">Next</a>
+					</li>
+				</ul>
+				<!--左右箭头 End-->
+			</div>
+			<%end%>
+		</div>
+		<%end%>
+		<div class="show-venue-right-part col-xs-12 col-sm-7">
+			<div class="show-venue-row">
+				<span class="show-label xs-no-padding">场馆名称：</span>
+				<span class="show-label-content xs-no-padding"><%= @venue.name%></span>
+			</div>
+			<div class="show-venue-row">
+				<span class="show-label xs-no-padding">场馆地址：</span>
+				<span class="show-label-content xs-no-padding"><%= @venue.address%></span>
+			</div>
+			<div class="show-venue-row">
+				<span class="show-label xs-no-padding">联系电话：</span>
+				<span class="show-label-content xs-no-padding"><%= @venue.phone%></span>
+			</div>
+			<input type="hidden" id="lon" value="<%=@venue.lon%>" />
+			<input type="hidden" id="lat" value="<%=@venue.lat%>" />
+			<input type="hidden" id="venue_name" value="<%=@venue.name%>" />
+		</div>
+	</div>
+	<div id="allmap"></div>
+</div>
+<style type="text/css">
+	#allmap {width: 100%;height: 350px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+</style>
+<script type="text/javascript">
+	function loadScript() {
+		var script = document.createElement("script");
+		script.src = "http://api.map.baidu.com/api?v=2.0&ak=TjemrBSxT5GSxjEIsjaMzApt&callback=initialize";
+		document.body.appendChild(script);
+	}
+	window.onload = loadScript;
+</script>
+<script type="text/javascript">
+	function initialize() {  
+	  // 百度地图API功能
+		var map = new BMap.Map("allmap");            
+		
+		var lon = $("#lon").val();
+		var lat = $("#lat").val();
+		if (lon.length > 0 && lat.length > 0) {
+			map.centerAndZoom(new BMap.Point(lon, lat), 15);  // 初始化地图,设置中心点坐标和地图级别
+			//创建图标
+			var opt = new BMap.Point(lon, lat);
+			var oIcon = new BMap.Icon("/assets/venue_map_icon.png", new BMap.Size(100,150));
+			var oMarker = new BMap.Marker(opt,{icon:oIcon});  // 创建标注
+			map.addOverlay(oMarker);              // 将标注添加到地图中
+		} else {
+			map.centerAndZoom("苏州",12);
+		}
+		
+		map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+		map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+		
+		var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+		var top_left_navigation = new BMap.NavigationControl(); 
+		map.addControl(top_left_control); 
+		map.addControl(top_left_navigation); 
+	} 
+</script>

@@ -1,0 +1,37 @@
+<div class="container news-container xs-no-padding" ng-controller="editProfileController">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>参赛列表</span>
+		</div>
+	</div>
+	<div class="show-row">
+		<table class="table table-hover table-bordered">
+			<thead class="bordered-darkorange">
+				<tr class="competition-item">
+					<th>赛事名称</th>
+					<th>赛事类别</th>
+					<th>项目</th>
+					<th>报名时间</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%if @teams.present?%>
+				<% @teams.each do |team| %>
+				<tr>
+					<td>
+						<a href="<%= team_path(team)%>"><%= team.competition.name%></a>
+					</td>
+					<td><%= team.competition.show_kind%></td>
+					<td> 
+						<%if team.competition.kind == 1%>
+						<%= team.units.first.item.show_full_name%>
+						<%end%> 
+					</td>
+					<td><%= team.created_at.strftime('%F %R')%></td>
+				</tr>
+				<% end%>
+				<% end%>
+			</tbody>
+		</table>
+	</div>
+</div>

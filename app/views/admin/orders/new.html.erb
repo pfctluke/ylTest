@@ -1,0 +1,57 @@
+<div id="admin-container"class="admin-container" data-type="orders">
+	<!-- 信息提示区域 -->
+	<div id="noticeArea">
+		<% if flash[:notice] %>
+		<div class="info-box alert-danger">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice] %></span>
+		</div>
+		<% end %>
+		
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @order.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= @order.errors.messages.first[1][0] %></span>
+			</div>
+		<% end %>
+	</div>
+	<!-- 信息提示区域 end-->
+	<div class="widget">
+		<div class="widget-header bordered-bottom bordered-blue">
+			<span class="widget-caption"><%=((@title.blank?)?"":@title) %></span>
+		</div>
+		<div class="widget-body">
+			<%= form_for @order, url: {:action => "create"}, method: "post"  do |f| %>
+				<div class="form-group">
+					<label>商品名称</label>
+					<%= f.text_field :subject, :class => "form-control", "maxlength" => "255", :readonly => "true" %>
+			  	</div>
+			  	<div class="form-group">
+					<label>总价</label>
+					<%= f.text_field :total_fee, :class => "form-control", :readonly => "true"%>
+			  	</div>
+			  	<div class="form-group">
+					<label>姓名</label>
+					<input class="form-control" readonly="true" value="<%= @user.full_name%>" />
+			  	</div>
+			  	<div class="form-group">
+					<label>手机号</label>
+					<input class="form-control" readonly="true" value="<%= @user.phone%>" />
+			  	</div>
+			  	<div class="form-group">
+					<label>有效期至</label>
+					<input class="form-control" readonly="true" value="<%= @expire_time%>" />
+			  	</div>
+			  	<input type="hidden" name="user_id" value="<%= @user.id%>" />
+			  	<div class="form-group">
+			  		<%= f.submit "保存",:class => "btn btn-blue" %>
+			  	</div>
+			<% end %>
+		</div>
+	</div>
+<div>

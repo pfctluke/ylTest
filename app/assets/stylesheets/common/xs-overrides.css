@@ -1,0 +1,256 @@
+@media (max-width: 767px){
+/* 超小屏幕 手机 */
+	.back_to_top{
+		bottom: 11px;
+	}
+	.hidden-xs{
+		display: none !important;
+		visibility: hidden !important;
+	}
+	.show-xs{
+		display: block !important;
+		visibility: visible !important;
+	}
+	.home-footer-copyright{
+		width: 60%;
+		margin-top: 3px;
+	}
+	.home-header-head-navbar{
+		border: none;
+	}
+	.home-header-head-navbar-content{
+		display: none;
+	}
+	.home-module{
+		margin-top: 0px;
+	}
+	.home-header-title{
+		margin: 12px 0;
+	}
+	.competition-module-content{
+        /*padding-top: 16px;*/
+    }
+	/**/
+	.xs-no-padding{
+		padding: 0;
+	}
+	.xs-no-margin{
+		margin: 0;
+	}
+	.friend-module{
+		margin-bottom: 0px;
+	}
+	.clubs-module, .venues-module, .coaches-module, .center-module, .friend-module, .news-module{
+		border: none;
+	}
+	.fix-footer-bug{
+		margin-top: 140px;
+	}
+	.news-show-header{
+		font-size: 13px;
+	}
+	.news-show-content-come{
+		font-size: 13px;
+	}
+	.news-show-content-title{
+		font-size: 17px;
+	}
+	.news-show-content-body{
+		font-size: 14px;
+	}
+	.edit-left-part{
+		border-right: none;
+	}
+	.home-drop-down-wrapper{
+		display: none;
+	}
+	
+	.home-friend-module-container{
+		/*height: 800px;*/
+	}
+	.friend-module-name{
+		max-width: 400px;
+	}
+	.show-venue-left-part{
+		padding: 0px 0;
+	}
+	.show-venue-right-part{
+		padding: 20px;
+	}
+	.show-venue-row{
+		padding-bottom: 10px;
+		float: left;
+		width: 100%;
+	}
+	.show-right-part-no-border{
+		padding: 10px;
+	}
+	.show-row{
+		padding-bottom: 10px;
+	}
+	.show-bottom-part{
+		padding: 10px;
+	}
+	.competition-day-module-subitem{
+		white-space: normal;
+		overflow: visible;
+	}
+	.img-title{
+		font-size: 35px;
+	}
+	.competitions-module-container{
+	    padding: 0;
+	}
+	.order_pay_btn {
+		float: none !important;
+		padding: 5px 40px;
+		font-size: 14px;
+	}
+	.order_pay_btn_container{
+		padding-top: 20px;
+	}
+	.order_show_fee{
+		font-size: 12px;
+	}
+	.home_competition_title{
+		padding-bottom: 5px;
+	}
+	.apply_button_container{
+		text-align: center;
+	}
+	.show-main-part-no-border {
+		padding: 10px;
+	}
+/* 超小屏幕 手机 End */
+}
+@media (max-width: 660px){
+	.friend-module-sum{
+		margin-left: 85px;
+	}
+	.friend-module-name{
+		max-width: 400px;
+	}
+	.img-title{
+		font-size: 30px;
+	}
+}
+@media (max-width: 536px){
+	.friend-module-sum{
+		margin-left: 85px;
+	}
+	.new-module-content-title{
+		font-size: 14px;
+		margin-bottom: 1px;
+	}
+	.new-module-content-sum,.essay-module-time,.new-module-time{
+		font-size: 12px;
+	}
+	.club-module-name{
+		font-size: 15px;
+	}
+	.venue-module-name{
+		font-size: 13px;
+	}
+	.center-module-content-name{
+		font-size: 19px;
+	}
+	.center-module-content-club{
+		font-size: 14px;
+	}
+	.center-module-content-msg{
+		font-size: 17px;
+		margin-top: 3px;
+	}
+	.home-footer-copyright{
+		width: 100%;
+		text-align: center;
+	}
+	.home-footer-logo{
+		display: none;
+	}
+	.home-footer-contact{
+		clear: both;
+		margin-left: 33px;
+		float: left;
+	}
+	
+	.essay-module-time{
+		margin-top: 20px;
+	}
+	
+	/*首页头图标题字体*/
+	.friend-module-name{
+		max-width: 200px;
+	}
+	.img-title{
+		font-size: 20px;
+	}
+	.competition-module-image{
+	    width: 18%;
+	}
+	.competition-detail-image{
+		width: 20%;
+	}
+	.home_competition_title{
+		padding-bottom: 0;
+	}
+	.competition-module-image{
+		margin-right: 20px;
+	}
+	.competition-detail-title{
+		font-size: 16px;
+	}
+	.competition-detail-address{
+		font-size: 14px;
+	}
+	.competition-detail-time{
+		font-size: 14px;
+	}
+}
+@media (max-width: 358px){
+	.friend-module-picture{
+		max-width: 50px;
+	}
+	.friend-module-name{
+		font-size: 12px;
+	}
+	.friend-module-club{
+		font-size: 13px;
+	}
+	.friend-module-time{
+		font-size: 12px;
+	}
+	.friend-module-sum{
+		font-size: 13px;
+		margin-left: 70px;
+	}
+	.new-module-content-title{
+		font-size: 14px;
+		margin-bottom: 0px;
+	}
+	.new-module-content-sum, .club-module-name, .venue-module-name,.essay-module-time, .competition-module-name{
+		font-size: 12px;
+	}
+	.center-module-content{
+		margin-top: 3%;
+	}
+	.center-module-content-name{
+		font-size: 17px;
+	}
+	.center-module-content-club{
+		font-size: 12px;
+	}
+	.center-module-content-msg{
+		font-size: 15px;
+		margin-top: 1px;
+	}
+	.home-footer-copyright{
+		width: 100%;
+	}
+	.friend-module-name{
+		max-width: 100px;
+	}
+	.competition-module-image{
+		margin-right: 20px;
+	}
+}

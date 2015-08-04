@@ -1,0 +1,33 @@
+<div class="container xs-no-padding messages-container" ng-controller="messageController">
+	<div class="list-module news-module">
+		<div class="module-title">
+			<div class="module-title-container">
+				<span>球友互动</span>
+				<a href="/messages/message_upload_view" class="messages_upload pull-right">我要发帖</a>
+				<!--<span class="module-title-more">News</span>-->
+			</div>
+		</div>
+	</div>
+	<!--Masonry 瀑布流-->
+	<div id="masonry" class="row masonry xs-no-margin" masonry>
+		<div class="item col-xs-12 col-sm-6 col-md-4 xs-no-padding hide" ng-model="messages" ng-repeat="message in messages">
+			<div class="friend-module flybox">
+			    <a href="{{message.message_images_first_url}}" title="{{message.body}}" data-lightbox="{{message.id}}">
+    				<div class="friend-module-image">
+    					<!--<img src="{{message.message_images_first_url}}" ng-if="message.message_images_first_url"/>
+    					<div class="default-row" ng-if="!message.message_images_first_url"></div>-->
+    					<img src="{{message.message_images_first_url}}"/>
+    				</div>
+    				<div class="pull-left friend-module-picture">
+    					<img src="{{message.user.profile_picture_url}}" onerror='this.src="/assets/default_head.png"'/>
+    				</div>
+    				<div class="pull-left friend-module-name" title="{{message.user.full_name}}">{{message.user.full_name}}</div>
+    				<div class="pull-left friend-module-club"></div>
+    				<div class="pull-right friend-module-time">{{message.create_time_show}}</div>
+    				<div class="clearfix"></div>
+    				<div class="friend-module-sum">{{message.body}}</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

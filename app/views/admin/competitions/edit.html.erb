@@ -1,0 +1,82 @@
+<div id="admin-container"class="admin-container" data-type="competitions">
+	<!-- 信息提示区域 -->
+	<div id="noticeArea">
+		<% if flash[:notice] %>
+		<div class="info-box alert-danger">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice] %></span>
+		</div>
+		<% end %>
+		
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @competition.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= @competition.errors.messages.first[1][0] %></span>
+			</div>
+		<% end %>
+	</div>
+	<!-- 信息提示区域 end-->
+	<div class="widget">
+		<div class="widget-header bordered-bottom bordered-blue">
+			<span class="widget-caption"><%=((@title.blank?)?"":@title) %></span>
+		</div>
+		<div class="widget-body">
+			<%= form_for @competition, url: admin_competition_path(@competition), method: "put"  do |f| %>
+				<div class="form-group">
+					<label>名称<span class="red-hint">(必填)</span></label>
+					<%= f.text_field :name, :class => "form-control", "maxlength" => "255" %>
+			  	</div>
+			  	<div class="form-group"> <!--0团体赛，1个人赛-->
+					<label>比赛类型<span class="red-hint">(必选)</span></label>
+					<div class="col-xs-12">
+						<label class="radio-inline"><%= f.radio_button :kind, 0%> 团体赛 </label>
+						<label class="radio-inline"><%= f.radio_button :kind, 1%> 个人赛 </label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			  	<div class="form-group">
+					<label>地点<span class="red-hint">(必填)</span></label>
+					<%= f.text_field :address, :class => "form-control", "maxlength" => "255" %>
+			  	</div>
+			  	<div class="form-group">
+					<label>赛事规程<span class="red-hint">(必填)</span></label>
+					<%= f.kindeditor :rule, :class => "form-control" %>
+			  	</div>
+			  	<div class="form-group">
+			  		<%= f.file_field :image, :onchange=>"previewImage(this)" %>
+			  		<%= image_tag(@competition.small_image_url, :class=>"edit-head-img edit_competition_image", :id=>"uploadImage")%>
+			  		<p>仅支持jpg、png格式，文件需小于512KB</p>
+			  		<div class="clearfix"></div>
+			  	</div>
+			  	<div class="form-group">
+					<label>比赛日</label>
+				  	<% @competition.competition_days.order("game_day asc").each do |competition_day| %>
+						<%= f.fields_for :competition_days, competition_day do |builder| %>
+						<div class="fields image-fields" >
+							<%= f.label "比赛日"%>
+							<div class="form-group">
+								<label>标题<span class="red-hint">(必填)</span></label>
+								<%= builder.text_field :title, :class => "form-control", "maxlength" => "255" %>
+							</div>
+							<div class="form-group">
+								<label>日期</label>
+								<%= builder.text_field :game_day, :class => "form-control datepicker-input", :readonly => "true", "data-provide"=>'datepicker', "data-date-format"=>"yyyy-mm-dd", "size"=>10,:value=>(competition_day.game_day.to_date if competition_day.game_day)%>
+							</div>
+							<%= link_to_remove_fields "删除", builder %>
+						</div>
+						<% end %>
+				  	<% end %>
+			  		<%= link_to_add_fields "添加比赛日", f, :competition_days %>
+			  	</div>
+			  	<div class="form-group">
+			  		<%= f.submit "保存",:class => "btn btn-blue" %>
+			  	</div>
+			<% end %>
+		</div>
+	</div>
+</div>

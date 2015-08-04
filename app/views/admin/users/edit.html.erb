@@ -1,0 +1,108 @@
+<div id="admin-container"class="admin-container" data-type="users">
+	<!-- 信息提示区域 -->
+	<div id="noticeArea">
+		<% if flash[:notice] %>
+		<div class="info-box alert-danger">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice] %></span>
+		</div>
+		<% end %>
+		
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @user.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= @user.errors.messages.first[1][0] %></span>
+			</div>
+		<% end %>
+	</div>
+	<!-- 信息提示区域 end-->
+	<div class="widget">
+		<div class="widget-header bordered-bottom bordered-blue">
+			<span class="widget-caption"><%=((@title.blank?)?"":@title) %></span>
+		</div>
+		<div class="widget-body">
+			<%= form_for @user, url: admin_user_path(@user), method: "put"  do |f| %>
+			  	<div class="form-group">
+			  		<label style="margin-bottom: 0">角色设置:&nbsp;</label>
+				  		<label class="radio-inline">
+				  			<%= f.radio_button :role, 'admin' %>管理员
+	  					</label>
+	  					<label class="radio-inline">
+				  			<%= f.radio_button :role, '' %>普通会员
+			  			</label>
+			  	</div>
+			  	<div class="form-group">
+					<label>姓名</label>
+					<%= f.text_field :full_name, :class => "form-control", "maxlength" => "255" %>
+			  	</div>
+			  	<div class="form-group">
+					<label>昵称</label>
+					<%= f.text_field :nickname, :class => "form-control", "maxlength" => "255" %>
+			  	</div>
+			  	<div class="form-group">
+			  		<label style="margin-bottom: 0">角色设置:&nbsp;</label>
+				  		<label class="radio-inline">
+				  			<%= f.radio_button :sex, '1' %>男
+	  					</label>
+	  					<label class="radio-inline">
+				  			<%= f.radio_button :sex, '0' %>女
+			  			</label>
+			  	</div>
+			  	<div class="form-group">
+					<label>生日</label>
+					<%= f.text_field :birthday, :class => "form-control datepicker-input", :readonly => "true", "data-provide"=>'datepicker', "data-date-format"=>"yyyy-mm-dd", "size"=>10,:value=>(@user.show_birthday if @user.show_birthday)%>
+			  	</div>
+			  	<div class="form-group">
+					<label>居住地址</label>
+					<%= f.text_field :address, :class => "form-control", "maxlength" => "255"%>
+			  	</div>
+			  	<div class="form-group">
+					<label>工作地址</label>
+					<%= f.text_field :company, :class => "form-control", "maxlength" => "255"%>
+			  	</div>
+			  	<div class="form-group">
+					<label>所属俱乐部</label>
+					<%= f.text_field :club_name, :class => "form-control", "maxlength" => "255"%>
+			  	</div>
+			  	<div class="form-group">
+					<label>球龄（年）</label>
+					<%= f.text_field :tennis_age, :class => "form-control", "maxlength" => "255", :type => "number"%>
+			  	</div>
+			  	<div class="form-group">
+			  		<label style="margin-bottom: 0">是否教练:&nbsp;</label>
+				  	<label class="radio-inline"> <%= radio_button("user", "is_coach", true)%> 是 </label>
+					<label class="radio-inline"> <%= radio_button("user", "is_coach", false, { :checked => true })%> 否 </label>
+			  	</div>
+			  	<div class="form-group">
+					<label>个性签名</label>
+					<%= f.text_area :personal_signature, :class => "form-control", "maxlength" => "255", :type => "number"%>
+			  	</div>
+			  	<div class="form-group">
+			  		<label>年费有效期至<span class="red-hint">(仅对通过审核的网协会员有效)</span></label>
+			  		<h4><%= @user.annual_fee_validity.strftime('%F %R') if @user.annual_fee_validity.present?%></h4>
+			  	</div>
+			  	<%if @user.status == 2%>
+			  	<div class="form-group">
+			  		<label>网协会员审核通过日期<span class="red-hint">(仅对通过审核的网协会员有效)</span></label>
+			  		<h4><%= @user.approval_time.strftime('%F %R') if @user.approval_time.present?%></h4>
+			  	</div>
+			  	<%end%>
+			  	<div class="form-group">
+			  		<label style="margin-bottom: 0">状态:&nbsp;</label>
+					<label class="radio-inline"><%= f.radio_button :status, '0' %>一般用户</label>
+					<label class="radio-inline"><%= f.radio_button :status, '1' %>网协会员待审核</label>
+					<label class="radio-inline"><%= f.radio_button :status, '2' %>网协会员已通过</label>
+					<label class="radio-inline"><%= f.radio_button :status, '3' %>网协会员已拒绝</label>
+			  	</div>
+			  	<div class="form-group">
+			  		<%= f.submit "保存",:class => "btn btn-blue" %>
+			  	</div>
+			<% end %>
+		</div>
+	</div>
+</div>

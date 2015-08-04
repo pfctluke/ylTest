@@ -1,0 +1,68 @@
+<div class="container news-container xs-no-padding" ng-controller="editProfileController">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>参赛详情</span>
+		</div>
+	</div>
+	<div class="show-main-part-no-border">
+		<div class="col-xs-12 no-padding">
+			<div class="competition-module-image competition-detail-image">
+				<% if @competition.image.present? %>
+				<%= image_tag @competition.image.url, onerror:'this.src="/assets/default_competition.png"'%>
+				<% else %>
+				<%= image_tag "default_competition.png"%>
+				<% end %>
+			</div>
+			<div class="new-module-content competition-module-content">
+				<p class="new-module-content-title home_competition_title competition-detail-title">
+					<%= @competition.name %>
+				</p>
+				<p class="new-module-content-sum home_competition_address competition-detail-address">
+					<%= @competition.address%>
+				</p>
+				<p class="new-module-content-sum home_competition_time competition-detail-time">
+					<%= @competition.competition_time %>
+				</p>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+	</div>
+	<div class="show-row">
+		<table class="table table-hover table-bordered">
+			<thead class="bordered-darkorange">
+				<tr class="competition-item">
+					<th>赛事类别</th>
+					<th>项目名称</th>
+					<th>报名时间</th>
+					<th>选手一</th>
+					<th>选手二</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%if @team.units.present?%>
+				<% @team.units.each do |unit| %>
+				<tr>
+					<td><%= unit.item.show_kind %></td>
+					<td> <%if unit.item.name.present?%>
+					<%= unit.item.name%>
+					<%else%>
+					<%= item.show_kind%>
+					<%end%> </td>
+					<td><%= unit.created_at.strftime('%F %R')%></td>
+					<td> <%if unit.first_player.present?%>
+					<% first_player = User.find(unit.first_player)%>
+					<%= first_player.full_name%>
+					<%end%> </td>
+					<td> <%if unit.second_player.present?%>
+					<% second_player = User.find(unit.second_player)%>
+					<%= second_player.full_name%>
+					<%end%> </td>
+				</tr>
+				<% end%>
+				<% end%>
+			</tbody>
+		</table>
+	</div>
+</div>

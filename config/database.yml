@@ -1,0 +1,26 @@
+connection: &connection
+  adapter: postgresql
+  username: postgres
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *connection
+  database: icityTennis
+  password: password
+  host: localhost
+
+test:
+  <<: *connection
+  database: icityTennis
+  password: password
+  host: localhost
+
+production:
+  <<: *connection
+  #database: icitymasstennis
+  #username: icitymasstennisuser
+  #password: iCityMassTennisUser2015
+  database: icityTennis
+  password: password
+  host: localhost

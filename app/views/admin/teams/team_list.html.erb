@@ -1,0 +1,42 @@
+<div id="admin-container"class="admin-container" data-type="teams" data-id="<%= @competition.id%>">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue">
+				<%= ((@title.blank?)?"":@title) %>
+			</div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>队伍名称</th>
+						<th>报名时间</th>
+						<th>队伍配置</th>
+						<th style="min-width: 60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<%if @teams.present?%>
+					<% @teams.each do |team| %>
+					<tr>
+						<td><%= team.id%></td>
+						<td><%= team.name %></td>
+						<td><%= team.created_at.strftime('%F %R')%></td>
+						<td>
+							<a class="btn btn-default" style="color: #000000;" href="/admin/competitions/<%= @competition.id%>/team/<%= team.id%>/show">查看</a>
+						</td>
+						<td>
+							<%= link_to '', admin_competition_team_path(@competition, team), method: :delete, data: { confirm: '确定删除?' }, :class => "icon-trash2 icon-delete" %>
+						</td>
+					</tr>
+					<% end%>
+					<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%if @teams.present?%>
+				<%= will_paginate @teams, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>
+				<%end%>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,71 @@
+<div id="admin-container"class="admin-container" data-type="competitions">
+	<div class="col-md-12 col-sm-12 col-xs-12"><a class="row-title" href="<%=new_admin_competition_path %>"><span>添加</span>&nbsp;<span class="icon-add"></span></a></div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue"><%=((@title.blank?)?"":@title) %></div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>名称</th>
+						<th>类型</th>
+						<th>比赛日</th>
+						<th>创建时间</th>
+						<th>首页显示</th>
+						<th>报名情况</th>
+						<th style="min-width: 60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @competitions.each do |competition| %>
+					<tr>
+						<td><%= competition.id %></td>
+						<% if competition.name.present? %>
+							<td><a href="<%=admin_competition_items_path(competition.id) %>"><%= competition.name %></a></td>
+						<% else %>
+							<td><a href="#">标题未命名</a></td>
+						<% end %>
+						<td><%= competition.show_kind%></td>
+						<td>
+							<div class="dropdown">
+							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="color: #000;">
+							    详情
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							  	<% competition.competition_days.order("game_day asc").each do |competition_day| %>
+							    	<li role="presentation"><a role="menuitem" tabindex="-1" ><%=competition_day.show_info%></a></li>
+							    <%end%>
+							  </ul>
+							</div>
+						</td>
+						<td><%= ((competition.created_at.present?)?competition.created_at.strftime('%F'):"") %></td>
+						<td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="color: #000;">
+                                <span><%= competition.show_on_home_page == 1?"Yes":"No" %></span>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%= admin_competition_change_on_home_page_status_path(competition.id) %>?status=0" >No</a></li>
+                                    <li role="presentation"><a role="menuitem" href="<%= admin_competition_change_on_home_page_status_path(competition.id) %>?status=1" >Yes</a></li>
+                                </ul>
+                            </div>
+						</td>
+						<td>
+							<a class="btn btn-default" style="color: #000000;" href="<%= (if competition.kind.to_i == 0 then admin_competition_team_list_path(competition.id) else admin_competition_items_path(competition.id) end)%>">查看</a>
+						</td>
+						<td>
+							<%= link_to '', edit_admin_competition_path(competition), 'data-no-turbolink' => true, :class => "icon-pencil" %>
+							<%= link_to '', admin_competition_path(competition), method: :delete, data: { confirm: '确定删除?' }, :class => "icon-trash2 icon-delete" %>
+						</td>
+					</tr>
+				<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%= will_paginate @competitions, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+			</div>
+		</div>
+	</div>
+</div>

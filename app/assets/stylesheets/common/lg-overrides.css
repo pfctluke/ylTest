@@ -1,0 +1,88 @@
+@media (min-width: 1200px){
+/* 大屏幕 */
+	.container{
+		width: 90%;
+	}
+	/**/
+	.lg-pull-right{
+		float:right;
+	}
+	.home-friend-module-container{
+		/*height: 2020px;*/
+	}
+	/**/
+	.new-module-content-title{
+		margin: 5px 0px;
+	}
+	.club-module-name, .new-module-content-title{
+		font-size: 25px;		
+	}
+	.new-module-content-sum{
+		font-size: 19px;
+	}
+	.friend-module-sum{
+		margin-left: 21%;
+	}
+	html.mm-right.mm-opening .mm-page, html.mm-right.mm-opening #mm-blocker{
+		transform: translate(0px, 0px);
+		-webkit-transform: translate(0, 0);
+	}
+	.news-container .new-module{
+		padding: 25px 30px;
+	}
+	.news-container .new-module-image{
+		max-width: 162px;
+	}
+	.news-container .new-module-content-title{
+		font-size: 24px;
+		margin-bottom: 8px;
+		margin-top: 18px;
+	}
+	.news-container .competition-detail-title{
+		margin-top: 0;
+	}
+	.news-container .essay-module-content-title{
+		margin-top: 0px;
+	}
+	.news-container .new-module-content-sum{
+		font-size: 19px;
+	}
+	.new-module-time{
+		display: block;
+	}
+	.list-module .module-title-container{
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+	.news-show-header{
+		font-size: 15px;
+	}
+	.news-show-content-come{
+		font-size: 16px;
+	}
+	.news-show-content-body{
+		font-size: 17px;
+	}
+	.edit-sm-border-bottom{
+		border-bottom: none;
+	}
+	.img-title{
+		font-size: 45px;
+	}
+	
+	.competition-module-content{
+	    padding-top: 0px;
+	}
+	.competition-module-lg{
+	    /*width: 50%;*/
+	    min-height: 110px;
+	}
+	.home_competition_title{
+		padding-bottom: 0px;
+	}
+	.competition-module-image {
+		width: 15%;
+		max-width: 114px;
+	}
+/* 大屏幕 End*/
+}

@@ -1,0 +1,47 @@
+<div class="container news-container xs-no-padding" ng-controller="editProfileController">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>俱乐部详情</span>
+		</div>
+	</div>
+	<div class="show-main-part">
+		<div class="show-left-part center col-xs-12 col-sm-3">
+	  		<div class="show-left-part-wrapper">
+	  			<% if @club.small_logo_url.blank? %>
+	  				<img id="profile-head-img" class="edit-head-img" src="/assets/default_club.png" alt="" />
+	  			<% else %>
+	  				<img id="profile-head-img" class="edit-head-img" src="<%= @club.small_logo_url %>" alt="" onerror='this.src="/assets/default_club.png"' />
+	  			<% end %>
+	  		</div>
+	  		<!-- <div class="edit-right-part-wrapper">
+	  			<div class="login-valid edit-upload">本地上传</div>
+	  		</div> -->
+	  		<div class="show-left-part-wrapper">
+	  			<p><%=@club.name%></p>
+	  		</div>
+	  	</div>
+	  	
+	  	<div class="show-right-part col-xs-12 col-sm-9">
+	  		<div class="show-row">
+		    	<span class="show-label xs-no-padding">负责人：</span>
+		    	<span class="show-label-content xs-no-padding"><%=@user.full_name if @user.present?%></span>
+		  	</div>
+		  	<div class="show-row">
+		    	<span class="show-label xs-no-padding">介绍：</span>
+		    	<span class="show-label-content xs-no-padding"><%=@club.introduction%></span>
+		  	</div>
+		  	<div class="show-row">
+		    	<span class="show-label xs-no-padding">主要活动场地：</span>
+		    	<span class="show-label-content xs-no-padding"><%=@club.field%></span>
+		  	</div>
+		  	<div class="show-row">
+		    	<span class="show-label xs-no-padding">会员资格：</span>
+		    	<span class="show-label-content xs-no-padding"><%=@club.membership%></span>
+		  	</div>
+		  	<div class="show-row">
+		    	<span class="show-label xs-no-padding">联系电话：</span>
+		    	<span class="show-label-content xs-no-padding"><%=@club.phone%></span>
+		  	</div>
+	  	</div>
+	</div>
+</div>

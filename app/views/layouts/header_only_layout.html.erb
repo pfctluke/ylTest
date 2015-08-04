@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="tennis">
+<head>
+  <title>苏州工业园区网球协会</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!--[if lte IE 8]><script>window.location.href='<%=error_browser_path%>'</script><![endif]-->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <%= javascript_include_tag "common/html5shiv.min" %>
+      <%= javascript_include_tag "common/response.min" %>
+    <![endif]-->
+</head>
+<body>
+
+<div>
+<!-- Header Section -->
+<%= render 'layouts/header' %>
+<!-- Header Section -->
+<div id="pjax-container">
+	<%= yield %>
+</div>
+
+</div>
+<!-- Back to Top -->
+<a onclick="pageScroll()" class="back_to_top"></a>
+<!-- Back to Top End -->
+<!-- Loading -->
+<div>
+	<div class="yl-loading yl-loading-bg"></div>
+	<img class="yl-loading yl-loading-img" src="/assets/YL_loading.png">
+</div>
+<!-- Loading End -->
+
+</body>
+</html>

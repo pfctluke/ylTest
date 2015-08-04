@@ -1,0 +1,48 @@
+	<div class="container" ng-controller="messageUploadController">  
+	<h3>有什么趣事想分享给大家？</h3>
+	<%= form_for @message, :url =>{:action => 'upload'}, :html => {:multipart => true} do |f| %> 
+		<!-- 信息提示区域 -->
+		<div id="noticeArea">
+			<% if flash[:notice] %>
+			  <div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= flash[:notice] %></span>
+			</div>
+			<% end %>
+			
+			<!-- 有多条错误时显示第一条错误 -->
+			<% if @message.errors.any? %>
+				<div class="info-box alert-danger">
+					<a href="#" class="close" data-dismiss="alert">
+				    	&times;
+					</a>
+					<span><%= @message.errors.messages.first[1][0] %></span>
+				</div>
+			<% end %>
+		</div>
+		<!-- 信息提示区域 end-->
+		<span id="messageCounter" class="message-text-area-label pull-right">还可以输入<span class="message-text-area-hint">{{maxLength-textArea1.length}}</span>个字</span>
+		
+		<div class="message-inline-block message-release-text-area">
+			<%= f.text_area :body, :id => "body", :class => "form-control message-release-text-area", "maxlength" => "{{maxLength}}", "ng-model" => "textArea1" %>
+		</div>
+		
+		<span class="message-inline-block">
+			<span class="icon-image message-image-icon" ></span>	
+			<%= f.fields_for :message_images do |m| %> 
+	    		<%= m.file_field :image, :id => "imgFile", :value => "图片", "accept" => "image/*", "class" => "message-image-input", :onchange => "previewImage(this);"%> 
+	    	<% end %>
+			<!-- <input accept="image/*" class="" id="imgFile" name="message[message_images_attributes][0][image]" onchange="previewImage(this);" type="file" multiple="multiple" value="图片" />  -->
+    	</span>
+    	<span class="message-inline-block pull-right">	
+    		<%= f.submit '发布', :id => "submit", :class => "message-release-submit", :onclick =>"return messageUploadValidate()" %>
+    	</span>
+		<div class="message-picture">
+		<!-- <div class="message-picture col-xs-3 col-md-3 col-sm-3"> -->
+			<img id="messagePicture" class="message-picture" src="" alt=""/>	
+		</div>
+    <% end %>
+    </div>
+    

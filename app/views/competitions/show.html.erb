@@ -1,0 +1,119 @@
+<div class="container news-container xs-no-padding" ng-controller="editProfileController">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>赛事详情</span>
+		</div>
+	</div>
+	<div class="show-main-part-no-border">
+		<div class="col-xs-12 col-sm-8 no-padding">
+			<div class="competition-module-image competition-detail-image">
+				<% if @competition.image.present? %>
+				<%= image_tag @competition.image.url, onerror:'this.src="/assets/default_competition.png"'%>
+				<% else %>
+				<%= image_tag "default_competition.png"%>
+				<% end %>
+			</div>
+			<div class="new-module-content competition-module-content">
+				<p class="new-module-content-title home_competition_title competition-detail-title">
+					<%= @competition.name %>
+				</p>
+				<p class="new-module-content-sum home_competition_address competition-detail-address">
+					<%= @competition.address%>
+				</p>
+				<p class="new-module-content-sum home_competition_time competition-detail-time">
+					<%= @competition.competition_time %>
+				</p>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		
+		<div class="col-xs-12 col-sm-4 pull-right apply_button_container">
+			<%if @competition.kind.to_i == 0%>
+				<a href="<%= competition_teams_new_team_path(@competition)%>" class="btn_apply" data-toggle="modal">我要报名</a>
+			<%else%>
+				<a href="#myModal" role="button" class="btn_apply" data-toggle="modal">我要报名</a>
+			<%end%>
+		</div>
+	</div>
+	<div class="show-bottom-part">
+	    <div class="show-row">
+                <span class="show-label xs-no-padding">类型：</span>
+                <span class="show-label-content xs-no-padding"><%=@competition.show_kind%></span>
+            </div>
+            <div class="show-row">
+                <span class="show-label xs-no-padding">比赛日：</span>
+                <div class="clearfix"></div>
+                <%if @competition.competition_days.present?%>
+                    <% @competition.competition_days.order("game_day asc").each do |competition_day| %>
+                    <div class="competition-day-module col-xs-12 col-sm-6 col-md-4">
+                        <div class="competition-day-module-subitem" data-toggle="tooltip" title="<%=competition_day.show_info%>"><%=competition_day.show_info%></div>
+                    </div>
+                    <%end%>
+                <%end%>
+            </div>
+            <div class="show-row">
+                <table class="table table-hover table-bordered">
+                    <thead class="bordered-darkorange">
+                        <tr class="competition-item">
+                            <th>类别</th>
+                            <th>名称</th>
+                            <th>年龄限制</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <%if @competition.items.present?%>
+                    <% @competition.items.each do |item| %>
+                        <tr>
+                            <td><%= item.show_kind %></td>
+                            <td>
+                                <%if item.name.present?%>
+                                    <%= item.name%>
+                                <%else%>
+                                    <%= item.show_kind%>
+                                <%end%>
+                            </td>
+                            <td><%= item.show_age_limit%></td>
+                            <td><%= item.remark%></td>
+                        </tr>
+                    <% end%>
+                    <% end%>
+                    </tbody>
+                </table>
+            </div>
+		<div class="show-row">
+			<span class="show-label xs-no-padding">赛事规程：</span>
+		    <div class="clearfix"></div>
+			<div class="news-show-content-body"><%=sanitize @competition.rule%></div>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<%if @competition.kind.to_i == 1%>
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="margin-top: 20%;">
+		<div class="modal-content" style="border-radius: 0;">
+			<div class="modal-header">
+				<h3 class="col-xs-10" id="myModalLabel" style="margin: 0;">请选择参赛项目</h3>
+				<button type="button" class="close col-xs-2" data-dismiss="modal" aria-hidden="true" style="text-align: right;">
+					×
+				</button>
+				<div class="clearfix"></div>
+			</div>
+			<div class="modal-body">
+				<ul class="competition_apply_items">
+					<% @competition.items.each do |item|%>
+					<li>
+						<a href="<%=competition_teams_new_individual_path(@competition) + "?item_id=" + item.id.to_s %>">
+							<%= (item.name + "(" + item.show_kind + ")")%>
+							<span style="color: #257641">>></span>
+						</a>
+					</li>
+					<%end%>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<%end%>

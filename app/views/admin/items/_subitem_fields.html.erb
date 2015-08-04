@@ -1,0 +1,12 @@
+<div class="fields image-fields" >
+	<%= f.label "赛程安排"%>
+	<div class="form-group">
+		<label>标题<span class="red-hint">(必填)</span></label>
+		<%= f.text_field :title, :class => "form-control", "maxlength" => "255" %>
+	</div>
+	<div class="form-group">
+		<label>日期</label>
+		<%= f.text_field :game_day, :class => "form-control datepicker-input", :readonly => "true", "data-provide"=>'datepicker', "data-date-format"=>"yyyy-mm-dd", "size"=>10, :value => Time.now.strftime("%Y-%m-%d")%>
+	</div>
+	<%= link_to_remove_fields "删除", f %>
+</div>

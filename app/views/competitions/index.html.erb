@@ -1,0 +1,25 @@
+<div class="container news-container xs-no-padding">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>赛事</span>
+		</div>
+	</div>
+	<div class="competitions-module-container">
+		<% @competitions.each do |competition| %>
+		<a href="<%= competition_path(competition)%>">
+			<div class="col-xs-4 col-sm-3 col-md-2 competition-module">
+				<div class="competition-module-image">
+					<%= image_tag competition.image.url(:small), onerror:'this.src="/assets/default_competition.png"'%>
+				</div>
+				<div class="competition-module-name">
+					<%=competition.name%>
+				</div>
+			</div>
+		</a>
+		<%end%>
+		<div class="clearfix"></div>
+	</div>
+	<div class="footer">
+		<%= will_paginate @competitions, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>
+	</div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container news-show-container">
+	<!--新闻头部-->
+	<div class="news-show-header">
+		<a href="<%=topic_topic_news_index_path%>" class="" data-pjax><%=@topic.title%>专题新闻</a>
+		<span>><%=@topic_news.title%></span>
+	</div>
+	<!--新闻头部End-->
+	<!--新闻内容-->
+	<div class="news-show-content">
+		<h3 class="news-show-content-title"><%=@topic_news.title%></h3>
+		<p class="news-show-content-come">
+			<% if @topic_news.show_news_time.present? %>
+			<span class="news-show-content-come-time"><%=@topic_news.show_news_time%></span>
+			<% end %>
+			<% if @topic_news.source.present? %>
+			<span>来源：<%=@topic_news.source%></span>
+			<% end %>
+		</p>
+		<% if (@images.present?) then %>
+		<div id="slider" class="swipe">
+			<!--图片部分-->
+			<div class="swipe-wrap">
+				<% @images.each do |image| %>
+				<div>
+					<%=image_tag image.image.url(:medium), onerror:'this.src="/assets/default.png"'%>
+				</div>
+				<% end %>
+			</div>
+			<!--图片部分 End-->
+			<!--下面的点s-->
+			<nav class="swipeNav">
+				<ul id="dots">
+					<% @images.each do |image| %>
+					<li class="<%=(@images.first == image)?'on':''%>"></li>
+					<% end %>
+				</ul>
+			</nav>
+			<!--下面的点s End-->
+			<!--左右箭头-->
+			<ul class="swipe-direction-nav">
+				<li>
+					<a class="swipe-prev" onclick="mySwipe.prev()" tabindex="-1">Previous</a>
+				</li>
+				<li>
+					<a class="swipe-next" onclick="mySwipe.next()">Next</a>
+				</li>
+			</ul>
+			<!--左右箭头 End-->
+		</div>
+		<% end %>
+		<div class="news-show-content-body"><%=sanitize @topic_news.body%></div>
+	</div>
+	<!--新闻内容End-->
+</div>

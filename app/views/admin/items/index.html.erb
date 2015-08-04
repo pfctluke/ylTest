@@ -1,0 +1,54 @@
+<div id="admin-container"class="admin-container" data-type="items" data-id="<%=@competition_id%>">
+	<div class="col-md-12 col-sm-12 col-xs-12"><a class="row-title" href="<%=new_admin_competition_item_path %>"><span>添加</span>&nbsp;<span class="icon-add"></span></a></div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue"><%=((@title.blank?)?"":@title) %></div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>类别</th>
+						<th>名称</th>
+						<th>备注</th>
+						<th>年龄限制</th>
+						<th>创建时间</th>
+						<%if @competition.kind == 1%>
+						<th>报名情况</th>
+						<%end%>
+						<th style="min-width: 60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @items.each do |item| %>
+					<tr>
+						<td><%= item.id %></td>
+						<td><%= item.show_kind %></td>
+						<td>
+							<%if item.name.present?%>
+								<%= item.name%>
+							<%else%>
+								<%= item.show_kind%>
+							<%end%>
+						</td>
+						<td><%= item.remark%></td>
+						<td><%= item.show_age_limit%></td>
+						<td><%= ((item.created_at.present?)?item.created_at.strftime('%F'):"") %></td>
+						<%if @competition.kind == 1%>
+						<td>
+							<a class="btn btn-default" style="color: #000000;" href="<%= admin_competition_individual_list_path(@competition.id) + "?item_id=" + item.id.to_s%>">查看</a>
+						</td>
+						<%end%>
+						<td>
+							<%= link_to '', edit_admin_competition_item_path(@competition, item), 'data-no-turbolink' => true, :class => "icon-pencil" %>
+							<%= link_to '', admin_competition_item_path(@competition, item), method: :delete, data: { confirm: '确定删除?' }, :class => "icon-trash2 icon-delete" %>
+						</td>
+					</tr>
+				<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%= will_paginate @items, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+			</div>
+		</div>
+	</div>
+</div>

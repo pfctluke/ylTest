@@ -1,0 +1,20 @@
+<div class="container news-show-container">
+	<!--征文头部-->
+	<div class="news-show-header">
+		<a href="<%=tennis_essays_path%>" class="">我的故事</a>
+		<span>><%=@essay.title%></span>
+	</div>
+	<!--征文头部End-->
+	<!--征文内容-->
+	<div class="news-show-content">
+		<h3 class="news-show-content-title"><%=@essay.title%></h3>
+		<p class="news-show-content-come">
+			<% if @essay.show_contribute_time.present? %>
+			<span class="news-show-content-come-time"><%=@essay.show_contribute_time%></span>
+			<% end %>
+			<span><%=@essay.author%><%= @essay.get_author_des%></span>
+		</p>
+		<div class="news-show-content-body"><%=simple_format(@essay.body)%></div>
+	</div>
+	<!--征文内容End-->
+</div>

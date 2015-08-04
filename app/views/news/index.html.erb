@@ -1,0 +1,39 @@
+<div class="container news-container xs-no-padding">
+	<div class="list-module news-module no-border">
+		<div class="module-title">
+			<div class="module-title-container">
+				<span>新闻</span>
+				<!--<span class="module-title-more">News</span>-->
+			</div>
+		</div>
+		<div class="new-module-container">
+			<% @news.each do |news| %>
+			<a href="<%=news_path(news)%>" data-pjax>
+				<div class="new-module">
+					<div class="new-module-image">
+						<% if news.images.present? %>
+						<%=image_tag news.images.first.photo.url(:thumb), onerror:'this.src="/assets/default.png"'%>
+						<% else %>
+						<%=image_tag "default.png"%>
+						<% end %>
+					</div>
+					<div class="new-module-content">
+						<p class="new-module-content-title"><%= news.title %></p>
+						<p class="new-module-content-sum"><%= news.show_body %></p>
+						<% if news.show_news_time.present? %>
+						<div class="new-module-time new-module-time-home">
+							<%= news.show_news_time %>
+						</div>
+						<% end %>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+			<% end %>
+		</div>
+		<div class="footer">
+			<%= will_paginate @news, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+		</div>
+	</div>
+</div>

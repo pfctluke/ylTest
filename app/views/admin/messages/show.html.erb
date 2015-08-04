@@ -1,0 +1,58 @@
+<div id="admin-container"class="admin-container" data-type="messages">
+	<!-- 信息提示区域 -->
+	<div id="noticeArea">
+		<% if flash[:notice] %>
+		<div class="info-box alert-danger">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice] %></span>
+		</div>
+		<% end %>
+		
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @message.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= @message.errors.messages.first[1][0] %></span>
+			</div>
+		<% end %>
+	</div>
+	<!-- 信息提示区域 end-->
+	<div class="widget">
+		<div class="widget-header bordered-bottom bordered-blue">
+			<span class="widget-caption"><%=((@title.blank?)?"":@title) %></span>
+		</div>
+		<div class="widget-body">
+			<% if @message.present?%>
+				<div class="form-group">
+					<span class="admin-message-label">发帖用户:</span>
+					<span><%=@message.user.full_name if @message.user.present?  %></span>
+				</div>
+				<div class="form-group">
+					<span class="admin-message-label">帖子内容:</span>
+					<span><%= @message.body %></span>
+				</div>
+				<div class="form-group">
+					<span class="admin-message-label">发帖时间:</span>
+					<span><%= @message.created_at.strftime('%F %R') %></span>
+				</div>
+				<% if @message.message_images.present? %>
+					<div class="form-group">
+						<span class="admin-message-label">帖子图片:</span>
+						<div class="image-fields">
+							<% @message.message_images.each do |i| %>
+								<img class="admin-message-img" src="<%= i.image.url %>"/>
+							<% end %>
+						</div>
+					</div>
+				<% end %>
+			  	<div class="form-group" style="border-top: 1px solid #DDDDDD;padding: 10px;">
+			  		<%= link_to '删除', admin_message_path(@message), method: :delete, data: { confirm: '确定删除?' }, :class => "btn btn-danger" %>
+			  	</div>
+		  	<% end %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+<div id="admin-container"class="admin-container" data-type="team_show" data-id="<%= @competition.id%>">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue">
+				<%= ((@title.blank?)?"":@title) %>
+			</div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>赛事类别</th>
+						<th>项目名称</th>
+						<th>报名时间</th>
+						<th>选手一</th>
+						<th>选手二</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%if @units.present?%>
+					<% @units.each do |unit| %>
+					<tr>
+						<td><%= unit.id%></td>
+						<td><%= unit.item.show_kind %></td>
+						<td> <%if unit.item.name.present?%>
+						<%= unit.item.name%>
+						<%else%>
+						<%= item.show_kind%>
+						<%end%> </td>
+						<td><%= unit.created_at.strftime('%F %R')%></td>
+						<td> <%if unit.first_player.present?%>
+						<% first_player = User.find(unit.first_player)%>
+						<%= first_player.full_name%>
+						<%end%> </td>
+						<td> <%if unit.second_player.present?%>
+						<% second_player = User.find(unit.second_player)%>
+						<%= second_player.full_name%>
+						<%end%> </td>
+					</tr>
+					<% end%>
+					<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%if @units.present?%>
+				<%= will_paginate @units, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>
+				<%end%>
+			</div>
+		</div>
+	</div>
+</div>

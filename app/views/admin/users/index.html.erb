@@ -1,0 +1,74 @@
+<div id="admin-container"class="admin-container" data-type="users">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue"><%=((@title.blank?)?"":@title) %></div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>注册手机号</th>
+						<th>用户名</th>
+						<th>创建时间</th>
+						<th>上次登录时间</th>
+						<th>角色</th>
+						<th>年费缴纳</th>
+						<th>是否教练</th>
+						<th>状态</th>
+						<th style="min-width: 60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @users.each do |user| %>
+					<tr>
+						<td><%= user.id %></td>
+						<td><%= user.phone %></td>
+						<% if user.full_name.present? %>
+							<td><%= user.full_name %></td>
+						<% else %>
+							<td></td>
+						<% end %>
+						<td><%= ((user.created_at.present?)?user.created_at.strftime('%F %R'):"") %></td>
+						<td><%= ((user.last_sign_in_at.present?)?user.last_sign_in_at.strftime('%F %R'):"") %></td>
+						<td><%= user.show_role %></td>
+						<td title=<%=(("有效期至" + user.annual_fee_validity.strftime('%F')) if user.status == 2 && user.annual_fee_validity.present?)%>>
+							<%if user.status == 2%>
+							<%= user.show_annual_fee_validity_status%>
+							<a href="orders/new?user_id=<%=user.id%>" class="btn btn-default" style="color: #000">续费</a>
+							<%else%>
+							无
+							<%end%>
+						</td>
+						<td> <%if user.is_coach?%>是<%else%>否<%end%></td>
+						<td>
+							<%if user.status == -1%>
+								待验证
+							<%elsif user.status == 0%>
+								已验证
+							<%else%>
+								<div class="dropdown">
+								  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="color: #444;">
+								    <%=user.show_status%>
+								    <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/users/<%=user.id%>/updateStatus?status=1">审核</a></li>
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/users/<%=user.id%>/updateStatus?status=2">通过</a></li>
+								    <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/users/<%=user.id%>/updateStatus?status=3">拒绝</a></li>
+								  </ul>
+								</div>
+							<%end%>
+						</td>
+						<td>
+							<%= link_to '', edit_admin_user_path(user), 'data-no-turbolink' => true, :class => "icon-pencil" %>
+							<%= link_to '', admin_user_path(user), method: :delete, data: { confirm: '确定删除?' }, :class => "icon-trash2 icon-delete" %>
+						</td>
+					</tr>
+				<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%= will_paginate @users, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+			</div>
+		</div>
+	</div>
+</div>

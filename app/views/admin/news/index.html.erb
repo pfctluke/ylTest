@@ -1,0 +1,39 @@
+<div id="admin-container"class="admin-container" data-type="news">
+	<div class="col-md-12 col-sm-12 col-xs-12"><a class="row-title" href="<%=new_admin_news_path %>"><span>添加</span>&nbsp;<span class="icon-add"></span></a></div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue"><%=((@title.blank?)?"":@title) %></div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>标题</th>
+						<th>创建时间</th>
+						<th style="min-width: 60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @news.each do |news| %>
+					<tr>
+						<td><%= news.id %></td>
+						<% if news.title.present? %>
+							<td><a href="<%= edit_admin_news_path(news) %>"><%= news.title %></a></td>
+						<% else %>
+							<td><a href="#">标题未命名</a></td>
+						<% end %>
+						
+						<td><%= ((news.created_at.present?)?news.created_at.strftime('%F'):"") %></td>
+						<td>
+							<%= link_to '', edit_admin_news_path(news), 'data-no-turbolink' => true, :class => "icon-pencil" %>
+							<%= link_to '', admin_news_path(news), method: :delete, data: { confirm: '确定删除?' }, :class => "icon-trash2 icon-delete" %>
+						</td>
+					</tr>
+				<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%= will_paginate @news, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+			</div>
+		</div>
+	</div>
+</div>

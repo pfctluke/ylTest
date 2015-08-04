@@ -1,0 +1,51 @@
+<div class="container news-container xs-no-padding" ng-controller="editProfileController">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>缴费查询</span>
+		</div>
+	</div>
+	<div class="show-order-fee-container">
+		<div class="col-sm-3 col-xs-5 order_show_fee">
+			<i>年费费用：￥<%= Commodity.get_annual_fee%></i>
+		</div>
+		<div class="col-sm-7 col-xs-7 order_show_fee">
+			<i>当前有效期：<%= @user.annual_fee_validity.to_date if @user.annual_fee_validity.present?%></i>
+		</div>
+		<div class="col-sm-2 col-xs-12 no-padding center order_pay_btn_container">
+			<a class="order_pay_btn" href="/orders/new">缴费</a>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="col-xs-12 no-padding">
+		<div class="show-row">
+			<table class="table table-hover table-bordered">
+				<thead class="">
+					<tr class="order-item">
+						<th>#</th>
+						<th>缴费时间</th>
+						<th>金额</th>
+						<th>支付方式</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%if @orders.present?%>
+					<% @orders.each do |order| %>
+					<tr>
+						<td><%= order.id %></td>
+						<td> <%if order.created_at.present?%>
+						<%= order.created_at.strftime('%Y-%m-%d %H:%M:%S')%>
+						<%end%> </td>
+						<td>￥<%= order.total_fee %></td>
+						<td><%= order.show_pay_type%></td>
+					</tr>
+					<% end%>
+					<% end%>
+				</tbody>
+			</table>
+		</div>
+		<div class="footer">
+			<%= will_paginate @orders, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>
+		</div>
+	</div>
+</div>

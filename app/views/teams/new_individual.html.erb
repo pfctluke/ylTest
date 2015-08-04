@@ -1,0 +1,89 @@
+<div class="container news-container xs-no-padding" ng-controller="editProfileController">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>个人赛报名</span>
+		</div>
+	</div>
+	<div id="noticeArea">
+		<% if flash[:notice].present? %>
+		<div class="info-box alert-success">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice]%></span>
+		</div>
+		<% end %>
+		<% if flash[:error].present? %>
+		<div class="info-box alert-danger">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:error]%></span>
+		</div>
+		<% end %>
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @team.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<% @team.errors.messages.each do |message|%>
+					<span><%= message[1][0] %></span><br/>
+				<%end%>
+			</div>
+		<% end %>
+	</div>
+	<div class="col-xs-12">
+	<%= form_for @team, url: {action: "create_individual"} do |f| %>
+		<% @team.units.each do |unit| %>
+			<%= f.fields_for :units, unit do |builder| %>
+				<h4><%= unit.item.name + "——" + unit.item.show_kind%></h4>
+				<p><%= unit.item.show_age_limit%></p>
+				<p><%= unit.item.remark if unit.item.remark.present?%></p>
+				<%= builder.text_field :item_id, :type => "hidden"%>
+				<div class="col-xs-12 col-sm-6 apply_edit_row">
+			    	<span class="edit-label col-xs-3 no-padding">选手一</span>
+			    	<div class="col-xs-9">
+			    		<input class="form-control" type="text" value="<%=(current_user.full_name if current_user.present?)%>" readonly="true">
+			    		<%= builder.text_field :first_player, :type => "hidden", :value => (current_user.id if current_user.present?)%>
+			  		</div>
+			  	</div>
+			  	<%if unit.item.kind > 2%>
+			  	<div class="col-xs-12 col-sm-6 apply_edit_row">
+			    	<span class="edit-label col-xs-3 no-padding">选手二</span>
+			    	<div class="col-xs-9">
+			    		<input class="form-control" href="#myModal" data-toggle="modal" type="text" readonly="true" id="<%= "player_input_2_" + unit.item.id.to_s%>" input-id="<%="2_" + unit.item.id.to_s%>" onClick="playerSelectClick(this);">
+			    		<%= builder.text_field :second_player, :type => "hidden", :id => ("player_id_input_2_" + unit.item.id.to_s)%>
+			  		</div>
+			  	</div>
+			  	<%end%>
+		  	<%end%>
+		<%end%>
+		<div class=" center col-xs-12 no-padding">
+			<div class="col-xs-2 col-sm-5"></div>
+	    	<%= f.submit "提交", :class =>"pay-submit col-xs-8 col-sm-2" %>
+	    	<div class="col-xs-2 col-sm-5"></div>
+	  	</div>
+	<% end %>
+</div>
+<input id="present_selected_input" type="hidden" value="-1" />
+<input id="present_selected_id_input" type="hidden" value="-1" />
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="margin-top: 15%;">
+		<div class="modal-content" style="border-radius: 0;">
+			<div class="modal-header">
+				<h4 class="col-xs-10">搜索队员</h4>
+				<button type="button" class="close col-xs-2" data-dismiss="modal" aria-hidden="true" style="text-align: right;">
+					×
+				</button>
+				<div class="clearfix"></div>
+			</div>
+			<div class="modal-body">
+				<input class="col-xs-12 form-control" id="players_search_input" style="margin: 0;border-radius: 0px;" placeholder="请输入选手姓名" onkeyup="getUsers();"/>
+				<div class="clearfix"></div>
+				<ul class="search_players" id="players_list">
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

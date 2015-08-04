@@ -1,0 +1,24 @@
+<div class="container news-container xs-no-padding">
+	<div class="list-module news-module no-border">
+		<div class="module-title">
+			<div class="module-title-container">
+				<span>历史专题</span>
+			</div>
+		</div>
+		<div class="new-module-container">
+			<% @topics.each do |topic| %>
+			<a href="<%=topic_topic_news_index_path(topic)%>" data-pjax>
+				<div class="new-module">
+					<div class="new-module-content">
+						<p class="new-module-content-title"><%= topic.title %></p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+			<% end %>
+		</div>
+		<div class="footer">
+			<%= will_paginate @topics, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+		</div>
+	</div>
+</div>

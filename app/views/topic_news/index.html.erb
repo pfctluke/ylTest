@@ -1,0 +1,40 @@
+<div class="container news-container xs-no-padding">
+	<div class="list-module news-module no-border">
+		<div class="module-title">
+			<div class="module-title-container">
+				<span>专题：<%=@topic.title%></span>
+				<!--<span class="module-title-more">News</span>-->
+				<a href="<%=topics_path%>"><span class="module-title-more pull-right">More...</span></a>
+			</div>
+		</div>
+		<div class="new-module-container">
+			<% @topic_news.each do |topic_news| %>
+			<a href="<%=topic_topic_news_path(@topic, topic_news)%>" data-pjax>
+				<div class="new-module">
+					<div class="new-module-image">
+						<% if topic_news.topic_news_images.present? %>
+						<%=image_tag topic_news.topic_news_images.first.image.url(:thumb), onerror:'this.src="/assets/default.png"'%>
+						<% else %>
+						<%=image_tag "default.png"%>
+						<% end %>
+					</div>
+					<div class="new-module-content">
+						<p class="new-module-content-title"><%= topic_news.title %></p>
+						<p class="new-module-content-sum"><%= topic_news.show_body %></p>
+						<% if topic_news.show_news_time.present? %>
+						<div class="new-module-time new-module-time-home">
+							<%= topic_news.show_news_time %>
+						</div>
+						<% end %>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</a>
+			<% end %>
+		</div>
+		<div class="footer">
+			<%= will_paginate @topic_news, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+		</div>
+	</div>
+</div>

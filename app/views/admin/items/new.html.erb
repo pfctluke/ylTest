@@ -1,0 +1,90 @@
+<div id="admin-container"class="admin-container" data-type="items" data-id="<%=@competition_id%>">
+	<!-- 信息提示区域 -->
+	<div id="noticeArea">
+		<% if flash[:notice] %>
+		<div class="info-box alert-danger">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice] %></span>
+		</div>
+		<% end %>
+		
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @item.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= @item.errors.messages.first[1][0] %></span>
+			</div>
+		<% end %>
+	</div>
+	<!-- 信息提示区域 end-->
+	<div class="widget">
+		<div class="widget-header bordered-bottom bordered-blue">
+			<span class="widget-caption"><%=((@title.blank?)?"":@title) %></span>
+		</div>
+		<div class="widget-body">
+			<%= form_for @item, url: {action: "create"}, method: "post"  do |f| %>
+				<div class="form-group">
+					<label>名称</label>
+					<%= f.text_field :name, :class => "form-control", "maxlength" => "255" %>
+			  	</div>
+			  	<div class="form-group"> <!--子项目类别，1男单，2女单，3男双，4女双，5混双-->
+					<label>比赛类型<span class="red-hint">(必选)</span></label>
+					<div class="col-xs-12">
+						<label class="radio-inline"><%= f.radio_button :kind, 1%> 男子单打 </label>
+						<label class="radio-inline"><%= f.radio_button :kind, 2%> 女子单打 </label>
+						<label class="radio-inline"><%= f.radio_button :kind, 3%> 男子双打 </label>
+						<label class="radio-inline"><%= f.radio_button :kind, 4%> 女子双打 </label>
+						<label class="radio-inline"><%= f.radio_button :kind, 5%> 混合双打 </label>
+						<label class="radio-inline"><%= f.radio_button :kind, 6%> 单打（男女混编） </label>
+						<label class="radio-inline"><%= f.radio_button :kind, 7%> 双打（男女混编） </label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form-group">
+					<label>备注</label>
+					<%= f.text_field :remark, :class => "form-control", "maxlength" => "255" %>
+			  	</div>
+			  	<div class="form-group"><!--0无年龄限制，1限制每个选手，2限制双打年龄总和，3限制混双男选手-->
+					<label>年龄限制<span class="red-hint">(必选)</span></label>
+					<div class="col-xs-12">
+						<label class="radio-inline"><%= f.radio_button :age_limit_type, 0, :onclick => "ageLimitChange(false)"%> 无限制 </label>
+						<label class="radio-inline"><%= f.radio_button :age_limit_type, 1, :onclick => "ageLimitChange(true)"%> 限制每位选手 </label>
+						<label class="radio-inline"><%= f.radio_button :age_limit_type, 2, :onclick => "ageLimitChange(true)"%> 限制双打年龄总和 </label>
+						<label class="radio-inline"><%= f.radio_button :age_limit_type, 3, :onclick => "ageLimitChange(true)"%> 限制混双男选手 </label>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="form-group" id="age_form" style="display: <%=(if @item.age_limit_type <= 0 then "none" else "block" end)%>;">
+					<div class="col-xs-6 no-padding">
+						<label class="pull-left">年龄</label>
+						<div class="clearfix"></div>
+						<div class="col-xs-4 no-padding">
+							<%= f.text_field :limit_age, :class => "form-control", :min => 0, :max => 200, :value => 0, :type => "number"%>
+						</div>
+						<div class="col-xs-2">
+							<%= f.select(:age_section_type, options_for_select([{"id"=> 0, "name" => "以下"}, {"id" => 1, "name" => "以上"}].collect {|p| [ p['name'], p['id'] ] }), {}, {required: 'true', autofocus: 'true', class: 'form-control'})%>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<!--
+					<div class="form-group">
+						<label>赛程</label>
+						<%= f.fields_for :subitems do |builder| %>
+							<%= render "subitem_fields", :f => builder %>
+						<% end %>
+						<%= link_to_add_fields "添加赛程", f, :subitems %>
+				  	</div>
+				-->
+				
+			  	<div class="form-group">
+			  		<%= f.submit "保存",:class => "btn btn-blue" %>
+			  	</div>
+			<% end %>
+		</div>
+	</div>
+<div>

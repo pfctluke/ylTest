@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="order_show_container">
+		<%if @message.present?%>
+			<h1><%=@message%></h1>
+		<%else%>
+			<h1>发生错误!</h1>
+		<%end%>
+		<h4><span id="time">5</span>秒钟之后自动跳转，如果不跳转，请点击<a href="/orders">缴费查询</a></h4>
+	</div>
+</div>
+<script>
+	$().ready(function() {
+		delayURL("/orders");
+	});
+</script>

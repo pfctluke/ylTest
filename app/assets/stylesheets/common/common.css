@@ -1,0 +1,1196 @@
+a, a span{
+	transition: color 0.5s;
+	-moz-transition: color 0.5s;	/* Firefox 4 */
+	-webkit-transition: color 0.5s;	/* Safari 和 Chrome */
+	-o-transition: color 0.5s;	/* Opera */
+}
+/*
+ * 滚动条美化
+ */
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 5px solid transparent;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: 1px 1px 5px rgba(0,0,0,.2) inset;
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 20px;
+  background-clip: content-box;
+  box-shadow: 0 0 0 5px rgba(0,0,0,.2) inset;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+html{
+	margin: 0;
+	min-height: 100%;
+	position: relative;
+}
+a:hover{
+	text-decoration: none;
+}
+
+/*
+ * 返回顶部按钮
+ */
+.back_to_top{
+	position: fixed;
+	right: 11px;
+	bottom: 80px;
+	display: none;
+	opacity: 0.66;
+	height: 46px;
+	width: 46px;
+	cursor: pointer;
+	border-radius: 4px; 
+	background: url("/assets/back_to_top.png") no-repeat left top / 100% auto;
+}
+.back_to_top:hover{
+	opacity: 1;
+}
+
+/*index page css*/
+#navMenu li a{
+	font-size: 18px;
+}
+footer {
+	bottom: 0;
+	position: absolute !important;
+	width: 100%;
+}
+.home-container{
+	overflow: hidden;
+}
+.mainbody-grey{
+	background-color: #e9eaee;
+}
+.home-footer{
+	background-color: #1D1D25;
+	padding: 25px 5px;
+}
+.home-footer-logo{
+	max-width: 20%;
+	width: 46px;
+	margin-right: 2%;
+}
+.home-footer-logo img, .home-header-title img{
+	width: 100%;
+}
+.home-footer-copyright{
+	font-size: 12px;
+	text-align: left;
+}
+.home-footer-copyright span{
+	color: #FFF;
+}
+.home-footer-contact{
+	list-style: none;
+	margin-bottom: 0;
+	float: right;
+	padding-left: 0;
+}
+.home-footer-contact li{
+	float: right;
+	width: 25%;
+	max-width: 55px;
+}
+.home-footer-contact img{
+	width: 100%;
+	max-width: 55px;
+}
+
+.home-header-head-image{
+	height: 44px;
+	width: 44px;
+	border-radius: 22px;
+	margin: 3px;
+}
+.home-header-head-image2{
+	height: 20px;
+	width: 20px;
+	border-radius: 10px;
+	margin-right: 5px;
+}
+.home-header-username{
+	font-size: 18px;
+	color: #FFFFFF;
+	line-height: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 100px;
+}
+.home-header-username:hover,
+.home-header-username:focus{
+	color: #fafd00;
+}
+.home-drop-down-wrapper{
+	cursor: pointer;
+	height: 50px;
+	padding: 15px 0;
+}
+.home-right-part{
+	padding-right: 0;
+	margin-bottom: 10px;
+}
+.news-module .module-title,.module-title{
+	background-color: #257641;
+}
+.clubs-module .module-title{
+	background-color: #6fb3f0;
+}
+.venues-module .module-title{
+	background-color: #ad83d8;
+}
+.coaches-module .module-title{
+	background-color: #ed7a3c;
+}
+.competitions-module .module-title{
+	background-color: #f87179;
+}
+.center-module .module-title{
+	background-color: #82B739;
+}
+.friends-module .module-title{
+	background-color: #fab634;
+}
+.news-module{
+	border: 1px solid #257641;
+}
+.clubs-module{
+	border: 1px solid #6FB3F0;
+}
+.venues-module{
+	border: 1px solid #ad83d8;
+}
+.friend-module{
+	border: 1px solid #fab634;
+}
+.coaches-module{
+	border: 1px solid #ed7a3c;
+}
+.competitions-module{
+	border: 1px solid #f87179;
+}
+/*.home-drop-down-wrapper:hover{
+	background: black;
+}*/
+.btn-group:hover .dropdown-menu{
+	display: block;
+}
+/*.open .home-drop-down-wrapper,.open ul{
+	background: black;
+}
+.dropdown-menu{
+	background: black;
+}*/
+
+.dropdown-menu .drop-down-border-bottom{
+	/*border-bottom: 1px solid #eeeeee;*/
+}
+
+.ico-facebook{
+	background: url("/assets/contact_facebook.png") no-repeat left top / 100% auto;
+}
+.ico-twitter{
+	background: url("/assets/contact_twitter.png") no-repeat left top / 100% auto;
+}
+.ico-tennis{
+	background: url("/assets/contact_tennis.png") no-repeat left top / 100% auto;
+}
+.ico-google{
+	background: url("/assets/contact_google.png") no-repeat left top / 100% auto;
+}
+.home-header-head{
+	background-color: #257641;
+	position: fixed;
+	z-index: 10;
+	right: 0;
+	left: 0;
+	top: 0;
+}
+.home-header-foot nav{
+	background-color: #FFF;
+	border: 0px;
+	padding-top: 50px;
+}
+.home-header-logo img{
+	margin-left: -15px;
+}
+.home-header-title{
+	margin: 25px 0px;
+	max-width: 50%;
+}
+.home-header-img{
+	width: 100%;
+}
+.home-header-nav{
+	margin-right: -15px;
+	margin-top: 32px;
+}
+.home-header-nav a{
+	font-size: 18px;
+}
+.home-header-foot .navbar-toggle{
+	background-color: #FDB900;
+	margin-top: 17.5px;
+}
+.home-header-foot .navbar-toggle .icon-bar{
+	background-color: #FFF;
+}
+.home-header-head-navbar{
+	border-left: 1px solid #FFF;
+	border-right: 1px solid #FFF;
+	font-size: 18px;
+	color: #FFF;
+}
+.home-header-head-navbar:hover{
+	color: #598527;
+}
+.navbar-toggle:hover .icon-bar{
+	background-color: #598527;
+}
+.home-module{
+	margin-top: 20px;
+}
+.home-friend-module-container{
+	/*overflow-y: auto;*/
+}
+/*首页左边的各个module*/
+.top-pic-module,.QRCodes-module,.center-module,
+.news-module,.clubs-module,.venues-module,.coaches-module, .competitions-module, .home-footer-module{
+	width: 100%;
+}
+.center-module,.news-module,.clubs-module,.venues-module,.coaches-module,.friend-module,.competitions-module{
+	background-color: white;
+}
+.home-footer-module{
+	margin-bottom: 20px;
+	text-align: center;
+}
+.module-title-container{
+	/*width: 90%;*/
+	margin-left: auto;
+	margin-right: auto;
+	line-height: 2.2em;
+	font-size: 18px;
+	font-style: italic;
+	width: 100%;
+	padding-left:15px;
+	padding-right:15px;
+}
+.head-module-title-container{
+	box-shadow: 0px 1px 5px #888;
+}
+.module-title-more{
+	color: #FFF;
+}
+.module-title-more:hover{
+	color: #006290;
+}
+.new-module{
+	padding: 15px;
+	background-color: #F9F9F9;
+	border: 1px solid #ECECEC;
+	border-style: none solid;
+}
+.new-module:hover, .new-module-container a:nth-child(2n) .new-module:hover{
+	background-color: #E3E3E3;
+}
+.new-module-container a:nth-child(2n) .new-module{
+	background-color: #ECECEC;
+}
+.new-module-container a{
+	color: #888;
+}
+.new-module-container a:hover{
+	color: #666;
+}
+.new-module-image{
+	float: left;
+	width: 25%;
+	margin-right: 15px;
+}
+.new-module-image img{
+	width: 100%;
+}
+.new-module-content{
+	/*float: left;
+	padding-left: 3%;
+	max-width: 75%;*/
+	position: relative;
+}
+.new-module-content-title{
+	font-size: 24px;
+	margin-bottom: 3px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #000000;
+}
+.new-module-content-sum{
+	font-size: 19px;
+	color: #868686;
+	margin-bottom: 0px;
+}
+.clubs-module-container, .venues-module-container, .coaches-module-container, .competitions-module-container{
+	padding: 2% 2%;
+}
+.clubs-module-container{
+	background-color: #F9F9F9;
+}
+.center-module-container{
+	padding: 3% 5%;
+}
+.club-module{
+	padding: 3% 5%;
+}
+.club-module:hover{
+	background-color: #E3E3E3;
+}
+.club-module-image img, .venue-module-image img, .friend-module-image img, .coaches-module-image img, .competition-module-image img{
+	width:100%;
+}
+.club-module-image img{
+	border-radius: 50%;
+}
+.club-module-name{
+	text-align: center;
+	font-size: 18px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #000000;
+}
+.venue-module{
+	padding: 3% 1%;
+}
+.venue-module:hover{
+	background-color: #E3E3E3;
+}
+.venue-module-image{
+	width: 100%;
+	margin-bottom: 10px;
+}
+.venue-module-name{
+	font-size: 16px;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #000000;
+}
+.coaches-module-container{
+	background-color: #F9F9F9;
+}
+.coaches-module:hover{
+	background-color: #E3E3E3;
+}
+.coaches-module-image img{
+	border-radius: 50%;
+}
+.coaches-module-name{
+	text-align: center;
+	font-size: 18px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #000000;
+}
+.competition-module{
+	padding: 3% 5%;
+}
+.competition-module:hover{
+	background-color: #E3E3E3;
+}
+.competition-module-container{
+	background-color: #F9F9F9;
+}
+.competition-module:hover{
+	background-color: #E3E3E3;
+}
+.competition-module-image img{
+	border-radius: 3px;
+}
+.competition-module-name{
+	text-align: center;
+	font-size: 16px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	color: #000000;
+	height: 44px;
+}
+.center-module-image{
+	max-width: 33%;
+	padding: 2%;
+}
+.center-module-image img{
+	width: 100%;
+	border-radius: 50%;
+}
+.center-module-content{
+	max-width: 59%;
+	padding: 2%;
+	margin-top: 10px;
+}
+.center-module-content-name{
+	font-size: 23px;
+}
+.center-module-content-club{
+	font-size: 18px;
+}
+.center-module-content-msg{
+	margin-top: 5px;
+	font-size: 21px;
+	color: #82B739;
+}
+.center-module-content-msg-ico{
+	margin-top: 2px;
+	margin-right: 10px;
+}
+.friend-module{
+	margin-bottom: 20px;
+	/*border: 1px solid #BDA5D7;*/
+}
+.friend-module-image{
+	margin-bottom: 15px;
+}
+.friend-module-picture{
+	max-width: 25%;
+	position: relative;
+	width: 60px;
+	margin: -25px 0px -20px 5%;
+}
+.friend-module-picture img{
+	width: 100%;
+	border: 3px solid #FFF;
+	border-radius: 50%;
+}
+.friend-module-name{
+	margin-left: 3%;
+	font-size: 18px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 200px;
+}
+.friend-module-club{
+	font-size: 15px;
+	margin-top: 3px;
+	margin-left: 1%;
+	color: #888888;
+}
+.friend-module-time{
+	font-size: 14px;
+	margin-top: 5px;
+	margin-right: 5%;
+	color: #888888;
+}
+.friend-module-sum{
+	font-size: 15px;
+	margin: 10px 5% 10px 18%;
+	color: #555555;
+	word-break: break-all;
+}
+.friend-module .col-xs-9{
+	margin-left: 0px;
+	padding-right: 25px;
+}
+.friends-module{
+	
+}
+.QRCodes-module{
+	background-color: #6FB4F0;
+}
+.QRCode-module{
+	padding: 0.5% 5%;
+}
+.QRCode-module img{
+	width: 100%;
+}
+.img-title{
+	color: #fff;
+    font-size: 25px;
+    margin-right: 8%;
+    margin-top: -36%;
+    padding-left: 8%;
+    padding-right: 8%;
+    word-wrap: break-word;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #444444;
+}
+.center-module{
+	border: 1px solid #82B739;
+}
+.default-row{
+	background: #dedede;
+	height:30px;
+}
+.sm-show{
+	display: none;
+}
+#navMenu-logo{
+	max-width: 50%;
+}
+.navMenu-weixin{
+	max-width: 75%;
+	padding: 10px 10px 10px 20px;
+	margin-top: 10px;
+}
+.fix-footer-bug{
+	margin-top: 140px;
+}
+/*新闻列表和显示news start*/
+.new-module-time{
+	display: none;
+	color: #868686;
+	font-size: 19px;
+	margin-top: 36px;
+}
+.new-module-time-home{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	display: block;
+	overflow: hidden;
+}
+.news-show-content{
+	border-radius: 0px 0px 5px 5px;
+	border: 1px solid #ECECEC;
+	background-color: #F9F9F9;
+	padding: 10px 3% 40px;
+}
+.news-show-header{
+	border-radius: 5px 5px 0px 0px;
+	border: 1px solid #ECECEC;
+	background-color: #F9F9F9;
+	padding: 1% 2%;
+	font-style: italic;
+}
+.news-show-content .swipe{
+	width: 100%;
+	max-width: 520px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.news-show-content-come-time{
+	margin-right: 15px;
+}
+.news-show-content-come{
+	font-size: 15px;
+}
+.news-show-content-body{
+	font-size: 16px;
+	color: #666666;
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+/*新闻列表和显示news end*/
+
+/*我的征文列表start*/
+.essay-module-time{
+	color: #868686;
+	font-size: 19px;
+	margin-top: 39px;
+	margin-left: 20px
+}
+
+.essay-module-time p{
+	margin:0;
+}
+
+.a-line{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.essay-module-story{
+	color: white;
+}
+/*我的征文列表end*/
+.common-title{
+	font-size:22px;
+	font-weight:bold;
+}
+/*球友互动页面*/
+.messages_upload{
+	font-size: 14px;
+	color: #FFFFFF;	
+}
+.messages_upload:hover{
+	color: #006290;
+}
+.message-release-module{
+	width: 80%;
+	margin:0 10%;
+}
+.message-release-text-area{
+	width: 100%;
+	height: 100px;
+	resize: none;
+}
+.message-release-submit{
+	border: none;
+	color: white;
+	background: #FAB901;
+	height: 25px;
+	width: 50px;
+	border-radius: 2px;
+	font-weight: 600;
+	margin-right: 2px;
+}
+.message-text-area-label{
+	margin-right: 10px;
+}
+.message-text-area-hint{
+	font-size:18px;
+	font-style: italic;
+}
+.message-inline-block{
+	display: inline-block;
+	margin-top: 5px;
+}
+.message-notice{
+	color: red;
+	padding: 0 10px;
+}
+.message-image-input{
+	margin-top: -28px;
+	opacity: 0;
+	width: 25px;
+	cursor: pointer;
+}
+.message-image-icon{
+	height: 30px;
+	font-size: 22px;
+	color: green;
+	cursor: pointer;
+}
+.message-picture{
+	padding: 5px;
+	max-width: 100%;
+}
+/*用户登录页面*/
+.grey-form{
+	background: #eee;
+	padding: 0px 0px 70px;
+}
+.login-submit{
+	border: none;
+	background: #629F3E;
+	color: white;
+	height: 36px;
+	font-size: 16px;
+	border-radius: 2px;
+}
+.login-row{
+	padding: 0;
+	width: 100%;
+	margin: 5px 0;
+	height: 34px;
+}
+.login-valid{
+	background: #FDB900;
+	border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    height: 23px;
+    line-height: 20px;
+    margin: 6px 0;
+    padding: 2px;
+    text-align: center;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    border: none;
+}
+.login-valid[disabled]{
+	cursor: not-allowed;
+}
+.register-valid{
+	right: 20px;
+}
+.login-margin-top{
+	margin-top: 50px;
+}
+/*个人信息编辑页面*/
+.edit-row{
+	padding: 10px 10px;
+	border-bottom: 1px solid #dddddd;
+	float: left;
+	width: 100%;
+}
+.edit-label{
+	height: 30px;
+	line-height: 30px;
+}
+.edit-text-area{
+	height: 100px;
+	resize: none;
+}
+.center{
+	text-align: center;
+}
+.edit-submit{
+	margin: 10px 0;
+	border: none;
+	background: #629F3E;
+	color: white;
+	height: 30px;
+	font-size: 16px;
+	border-radius: 2px;
+	width: 50%;
+}
+.pay-submit{
+	margin: 10px 0;
+	border: none;
+	background: #629F3E;
+	color: white;
+	height: 30px;
+	font-size: 16px;
+	border-radius: 2px;
+	margin-top: 40px;
+}
+.edit-radio{
+	line-height: 30px;
+}
+.edit-line{
+	background: #dddddd;
+	height: 1px;
+}
+.edit-head-img{
+	height: 100px;
+	width: 100px;
+	border: 3px solid #FFF;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.edit-main-part{
+	width: 100%;
+	float: left;
+}
+.edit-right-part-wrapper{
+	width: 100%;
+	text-align: center;
+	display: inline;
+	float: left;
+	margin: 5px;
+}
+.no-padding{
+	padding: 0;
+}
+.edit-left-part{
+	border-right: 1px solid #dddddd;
+}
+.edit-right-part{
+	padding: 10px 20px;
+}
+.edit-main-part{
+	border-bottom: 1px solid #dddddd;
+}
+.no-border-bottom{
+	border-bottom: none;
+}
+.edit-upload{
+	width: 60px;
+	height: 26px;
+	display: inline;
+	background: #FDB900;
+	border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    height: 23px;
+    line-height: 20px;
+    margin: 6px 0;
+    padding: 2px;
+    text-align: center;
+}
+.edit-file-input{
+	margin-left: -65px;
+	opacity: 0;
+	width: 60px;
+	cursor: pointer;
+	display: inline;
+}
+.edit-file-input-wrapper{
+	margin-top: -28px;
+	opacity: 0.5;
+}
+.edit-row-with-valid{
+	display: block;
+	color: #555;
+	background-color: #FFF;
+	background-image: none;
+	border: 1px solid #CCC;
+	border-radius: 4px;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+	transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+	padding-right: 7px;
+}
+
+.field_with_errors { 
+	display: inline; 
+}
+.info-box{
+	padding: 5px;
+	margin: 3px 0;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+.one-line{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.side-bar-name{
+	color: #FDB900;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 200px;
+}
+.headroom--top{
+	box-shadow: none;
+}
+.headroom--not-top{
+	box-shadow: 0 0 5px #888;
+}
+.slideInUp{
+	-webkit-animation-name: slideUp;
+	-moz-animation-name: slideUp;
+	-o-animation-name: slideUp;
+	animation-name: slideUp;
+}
+.slideInDown{
+	-webkit-animation-name: slideDown;
+	-moz-animation-name: slideDown;
+	-o-animation-name: slideDown;
+	animation-name: slideDown;
+}
+
+@-webkit-keyframes slideDown{
+	0%{
+		-webkit-transform: translateY(-50px)
+	}100%{
+		-webkit-transform: translateY(0)
+	}
+}
+@-moz-keyframes slideDown{
+	0%{
+		-moz-transform: translateY(-50px)
+	}100%{
+		-moz-transform: translateY(0)
+	}
+}
+@-o-keyframes slideDown{
+	0%{
+		-o-transform: translateY(-50px)
+	}100%{
+		-o-transform: translateY(0)
+	}
+}
+@keyframes slideDown{
+	0%{
+		transform: translateY(-50px)
+	}100%{
+		transform: translateY(0)
+	}
+}
+
+@-webkit-keyframes slideUp{
+	0%{
+		-webkit-transform: translateY(0)
+	}100%{
+		-webkit-transform: translateY(-50px)
+	}
+}
+@-moz-keyframes slideUp{
+	0%{
+		-moz-transform: translateY(0)
+	}100%{
+		-moz-transform: translateY(-50px)
+	}
+}
+@-o-keyframes slideUp{
+	0%{
+		-o-transform: translateY(0)
+	}100%{
+		-o-transform: translateY(-50px)
+	}
+}@keyframes slideUp{
+	0%{
+		transform: translateY(0)
+	}100%{
+		transform: translateY(-50px)
+	}
+}
+.no-border{
+	border: none;
+}
+.for-the-record-text {
+	color: #FFFFFF;
+	font-size: 12px;
+}
+nav.login-register-nav{
+	height: 50px;
+}
+li.login-register a{
+	color: #FFFFFF;
+	text-decoration: underline;
+	height: 50px;
+}
+li.login-register a:hover{
+	background-color: #257641;
+	color: #fafd00;
+	text-decoration: underline;
+}
+.show-left-part{
+	padding: 30px 0;
+}
+.show-venue-left-part{
+	padding: 30px 0;
+}
+.show-main-part{
+	width: 100%;
+	float: left;
+	border-bottom: 1px solid #dddddd;
+}
+.show-main-part-no-border{
+	width: 100%;
+	float: left;
+	padding: 30px;
+}
+.show-left-part-wrapper{
+	width: 100%;
+	text-align: center;
+	display: inline;
+	float: left;
+	margin: 5px 0;
+	font-size: 16px;
+	font-weight:bold;
+	color: #555555;
+}
+.show-right-part{
+	padding: 30px;
+	border-left: 1px solid #dddddd;
+}
+.show-bottom-part{
+	padding: 30px;
+}
+.show-right-part-no-border{
+	padding: 30px;
+}
+.show-venue-right-part{
+	padding: 30px;
+}
+.show-row{
+	padding-bottom: 30px;
+	float: left;
+	width: 100%;
+}
+.show-venue-row{
+	padding-bottom: 30px;
+	float: left;
+	width: 100%;
+}
+.show-label{
+	height: 30px;
+	line-height: 30px;
+	color: #555555;
+	font-size: 16px;
+	font-weight:bold;
+}
+.show-label-content{
+	height: 30px;
+	line-height: 30px;
+	color: #909090;
+	font-size: 15px;
+}
+.edit-club-notification{
+	border-bottom: 1px solid #dddddd;
+}
+.edit-club-notification p{
+	margin: 5px;
+	color: #FF0000;
+}
+.competition-day-module{
+	padding: 0 10px 10px 0;
+}
+.competition-day-module-subitem{
+	background: #257641;
+	color: #FFFFFF;
+	text-align: center;
+	width: 100%;
+	padding: 5px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+tr.competition-item th{
+	background: #fab634;
+}
+span.essays-author{
+	margin-left: 20px;
+}
+.module-title-container span{
+	color: #FFFFFF;
+}
+span.black-span-text{
+	color: #000000;
+}
+/*roy css start*/
+.competition-head-picture-wrapper{
+    padding: 30px;
+}
+.text-align-left{
+    text-align: left;
+}
+.competition-title-right{
+    font-size: 22px;
+    color: #00aeef;
+    margin: 0 0 5px;
+}
+.competition-time-right{
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    margin: 0;
+}
+.competition-module-image{
+    float: left;
+    width: 17%;
+    margin-right: 34px;
+}
+.competition-module-image img{
+    width: 100%;
+}
+.competition-module-lg{
+    border-left: none;
+    border-right: none;
+}
+.competitions-module-container{
+    padding: 0;
+}
+.competitions-module{
+}
+/*roy css end*/
+.order_show_container{
+	text-align: center;
+	margin-top: 10%;
+}
+tr.order-item th{
+	background: #257641;
+	color: #FFFFFF;
+}
+.order_show_fee{
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 32px;
+}
+.show-order-fee-container{
+	width: 100%;
+	padding: 20px 0px;
+}
+.order_pay_btn{
+	background: #257641;
+	padding: 0px 40px;
+	height: 32px;
+	line-height: 32px;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 16px;
+	float: right!important;
+}
+.order_pay_btn:hover{
+	color: #FFFFFF;
+}
+.menu_annual_fee_validity_notice_red{
+	font-size: 12px;
+	color: #cb2f1f;
+}
+.menu_annual_fee_validity_notice_green{
+	font-size: 12px;
+	color: #257641;
+}
+.home_competition_title{
+	color: #00aeef;
+	font-weight: bold;
+}
+.home_competition_address{
+	color: #000000;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.home_competition_time{
+	color: #000000;
+	font-weight: bold;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.competition_detail_icon{
+	border-radius: 3px;
+}
+.mobile_menu_nav li a:hover, .mobile_menu_nav li a:focus {
+	background-color: #282727;
+}
+.apply_edit_row{
+	padding: 15px;
+}
+.apply_button_container{
+	padding: 30px 10px 30px 0;
+	text-align: right;
+}
+.btn_apply{
+	color: #FFFFFF;
+	background: #257641;
+	padding: 5px 20px;
+	font-size: 18px;
+}
+.btn_apply:hover{
+	color: #FFFFFF;
+	background: #257641;
+	padding: 5px 20px;
+	font-size: 18px;
+}
+ul.competition_apply_items li {
+	padding-bottom: 10px;
+}
+ul.competition_apply_items li a{
+	font-size: 16px;
+	color: #000000;
+}
+ul.search_players {
+	background: #FFFFFF;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 0;
+}
+ul.search_players li {
+	padding: 5px 0;
+	list-style-type: none;
+	padding: 5px 15px;
+}
+ul.search_players li:hover{
+	background: #ccc;
+}
+ul.search_players li a{
+	font-size: 16px;
+	color: #000000;
+}

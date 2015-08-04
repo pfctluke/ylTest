@@ -1,0 +1,138 @@
+<div class="container news-container xs-no-padding" ng-controller="editProfileController">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>个人信息</span>
+		</div>
+	</div>
+	<div id="noticeArea">
+		<% if flash[:notice].present? %>
+		<div class="info-box alert-success">
+			<a href="#" class="close" data-dismiss="alert">
+		    	&times;
+			</a>
+			<span><%= flash[:notice]%></span>
+		</div>
+		<% end %>
+		
+		<!-- 有多条错误时显示第一条错误 -->
+		<% if @user.errors.any? %>
+			<div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= @user.errors.messages.first[1][0] %></span>
+			</div>
+		<% end %>
+	</div>
+	<!-- 主体部分 -->
+	<div class="edit-main-part" id="edit-main-part">
+		<%= form_for :user, url: '/users/update', method: 'post' do |f| %>
+		<!-- 左边部分 -->
+		<div class="edit-left-part col-xs-12 col-sm-8 no-padding">
+			<div class="edit-row">
+		    	<span class="edit-label col-xs-2 xs-no-padding">姓名</span>
+		    	<div class="col-xs-10" id="fullNameArea" data-toggle="tooltip" title="请输入姓名！" data-placement="top" data-animation="true" data-trigger="manual">
+		    		<%= f.text_field :full_name,:class => "form-control","maxLength" => "30", :id => "fullNameInput" %>
+		  		</div>
+		  	</div>
+			<div class="edit-row">
+		    	<span class="edit-label col-xs-2 xs-no-padding">昵称</span>
+		    	<div class="col-xs-10" id="nicknameArea" data-toggle="tooltip" title="请输入昵称！" data-placement="top" data-animation="true" data-trigger="manual">
+		    		<%= f.text_field :nickname,:class => "form-control","maxLength" => "30", :id => "nicknameInput"%>
+		  		</div>
+		  	</div>
+		 	<div class="edit-row">
+				<span class="edit-label col-xs-2 xs-no-padding">性别</span>
+			 	<div class="col-xs-10" id="sexArea" data-toggle="tooltip" title="请选择性别！" data-placement="top" data-animation="true" data-trigger="manual">
+					<label class="radio-inline"><%= f.radio_button :sex, '1'%> 男 </label>
+					<label class="radio-inline"><%= f.radio_button :sex, '0'%> 女 </label>
+				</div>
+		 	</div>
+		 	<div class="edit-row">
+		 		<span class="edit-label col-xs-2 xs-no-padding">生日</span>
+		 		<div class="col-xs-10" id="birthdayArea" data-toggle="tooltip" title="请选择出生年月日！" data-placement="top" data-animation="true" data-trigger="manual">
+		 			<%= f.text_field :birthday, :class => "form-control datepicker-input", :readonly => "true", "data-provide"=>'datepicker', "data-date-format"=>"yyyy-mm-dd", "size"=>10, :id => "birthdayInput", :value=>(@user.birthday.to_date if @user.birthday)%>
+		 		</div>
+		 	</div>
+		 	<%if @user.status.to_i > 0%>
+		 	<div class="edit-row">
+		 		<span class="edit-label col-xs-12 xs-no-padding">以下三项至少填写一项</span>
+		 	</div>
+		 	<%end%>
+		 	<div class="edit-row">
+		 		<label class="edit-label col-xs-12" >
+		 			<input type="checkbox" id="addressCheck" value="1" onchange="addressCheckClick();" > 本人为园区居民
+				</label>
+		 		<div class="col-xs-12" id="addressArea" data-toggle="tooltip" title="请至少填写一项！" data-placement="top" data-animation="true" data-trigger="manual">	
+		  			<%= f.text_field :address, autofocus: true, :class => "form-control pull-left",:id => "addressInput", :placeholder => "填写地址", :style => "display: none;"%>
+		  		</div>
+		 	</div>
+		 	<div class="edit-row">
+		 		<label class="edit-label col-xs-12" >
+		 			<input type="checkbox" id="companyCheck" value="1" onchange="companyCheckClick();" > 本人在园区工作
+				</label>
+		 		<div class="col-xs-12" id="companyArea" data-toggle="tooltip" title="请至少填写一项！" data-placement="top" data-animation="true" data-trigger="manual">	
+		  			<%= f.text_field :company, autofocus: true, :class => "form-control pull-left",:id => "companyInput", :placeholder => "填写工作单位名称", :style => "display: none;"%>
+		  		</div>
+		 	</div>
+		 	<div class="edit-row">
+		 		<label class="edit-label col-xs-12" >
+		 			<input type="checkbox" id="clubCheck" value="1" onchange="clubCheckClick();" > 本人为园区的网球俱乐部会员
+				</label>
+		 		<div class="col-xs-12" id="clubArea" data-toggle="tooltip" title="请至少填写一项！" data-placement="top" data-animation="true" data-trigger="manual">	
+		  			<%= f.text_field :club_name, autofocus: true, :class => "form-control pull-left",:id => "clubInput", :placeholder => "填写俱乐部名称", :style => "display: none;"%>
+		  		</div>
+		 	</div>
+		 	<div class="edit-row">
+		 		<span class="edit-label col-xs-3 col-sm-2 xs-no-padding">球龄（年）</span>
+		 		<div class="col-xs-9 col-sm-10" id="tennisAgeArea" data-toggle="tooltip" title="请输入正确的网球球龄！！" data-placement="top" data-animation="true" data-trigger="manual">	
+		  			<%= f.text_field :tennis_age,:class => "form-control", :min => 0, :max => 99, :id => "tennisAgeInput", :type => "number", :value => (if @user.tennis_age.blank? then 0 else @user.tennis_age end)%>
+		  		</div>
+		 	</div>
+		 	<div class="edit-row">
+		 		<span class="edit-label col-xs-3 col-sm-2 xs-no-padding">是否教练</span>
+		 		<div class="col-xs-9 col-sm-10" id="isCoachArea" data-toggle="tooltip" title="请选择是否是教练！" data-placement="top" data-animation="true" data-trigger="manual">
+					<label class="radio-inline"> <%= radio_button("user", "is_coach", true)%> 是 </label>
+					<label class="radio-inline"> <%= radio_button("user", "is_coach", false)%> 否 </label>
+				</div>
+		 	</div>
+		 	<div class="edit-row edit-sm-border-bottom">
+				<span class="edit-label col-xs-3 col-sm-2 xs-no-padding">个性签名</span>
+				<div class="col-xs-9 col-sm-10 edit-text-area">
+		    		<%= f.text_area :personal_signature, :class => "form-control edit-text-area", "maxlength" => "{{maxLength}}" %>
+		  		</div>
+		  	</div>
+	  	</div>
+	  	<!-- 左边部分 end-->
+	  	
+	  	<!-- 右边部分 -->
+	  	<div class="edit-right-part center col-xs-12 col-sm-4">
+	  		<div class="edit-right-part-wrapper">
+	  			<% if @user.small_profile_picture_url.blank? %>
+	  				<img id="profile-head-img" class="edit-head-img" src="/assets/default_head.png" alt="" />
+	  			<% else %>
+	  				<img id="profile-head-img" class="edit-head-img" src="<%= @user.small_profile_picture_url %>" alt="" onerror='this.src="/assets/default_head.png"' />
+	  			<% end %>
+	  		</div>
+	  		<!-- <div class="edit-right-part-wrapper">
+	  			<div class="login-valid edit-upload">本地上传</div>
+	  		</div> -->
+	  		<div class="edit-right-part-wrapper">
+	  			<div class="edit-upload">本地上传</div>
+	  			<%= f.file_field :profile_picture, :id => "imgFile", :class => "edit-file-input", :onchange => "previewImage(this);", "accept" => "image/*", :style => "display:inline;" %>
+	  			<p>仅支持jpg、png格式，文件需小于512KB</p>
+	  		</div>
+	  		
+	  	</div>
+	  	<!-- 右边部分 end-->
+  	</div>
+  	<!-- 主体部分 end -->
+	<div class=" center col-xs-12">
+		<%if @user.status.to_i == 0%>
+    		<%= f.submit "修改", :class =>"edit-submit", :onclick => "return editValidate(false);" %>
+    	<%else%>
+    		<%= f.submit "修改", :class =>"edit-submit", :onclick => "return editValidate(true);" %>
+    	<%end%>
+  	</div>
+	<% end %>
+</div>

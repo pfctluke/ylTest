@@ -1,0 +1,25 @@
+<div class="container news-container xs-no-padding">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>俱乐部</span>
+		</div>
+	</div>
+	<div class="clubs-module-container">
+		<% @clubs.each do |club| %>
+		<a href="<%= club_path(club)%>">
+			<div class="col-xs-4 col-sm-3 col-md-2 club-module" style="padding: 3% 2%;">
+				<div class="club-module-image">
+					<%= image_tag club.logo.url, onerror:'this.src="/assets/default_club.png"'%>
+				</div>
+				<div class="club-module-name">
+					<%= club.name%>
+				</div>
+			</div>
+		</a>
+		<%end%>
+		<div class="clearfix"></div>
+	</div>
+	<div class="footer">
+		<%= will_paginate @clubs, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>
+	</div>
+</div>

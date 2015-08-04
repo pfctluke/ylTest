@@ -1,0 +1,36 @@
+<div id="admin-container"class="admin-container" data-type="venues">
+	<div class="col-md-12 col-sm-12 col-xs-12"><a class="row-title" href="<%=new_admin_venue_path %>"><span>添加</span>&nbsp;<span class="icon-add"></span></a></div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue"><%=((@title.blank?)?"":@title) %></div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>场馆名称</th>
+						<th>场馆地址</th>
+						<th>联系电话</th>
+						<th style="min-width: 60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @venues.each do |venue| %>
+					<tr>
+						<td><%= venue.id %></td>
+						<td><a href="<%= edit_admin_venue_path(venue) %>"><%= venue.name %></a></td>
+						<td><%= venue.address%></td>
+						<td><%= venue.phone%></td>
+						<td>
+							<%= link_to '', edit_admin_venue_path(venue), 'data-no-turbolink' => true, :class => "icon-pencil" %>
+							<%= link_to '', admin_venue_path(venue), method: :delete, data: { confirm: '确定删除?' }, :class => "icon-trash2 icon-delete" %>
+						</td>
+					</tr>
+				<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%= will_paginate @venues, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+			</div>
+		</div>
+	</div>
+</div>

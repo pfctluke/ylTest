@@ -1,0 +1,50 @@
+<div class="container" ng-controller="loginController">  
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>验证新手机号</span>
+		</div>
+	</div>
+	<div class="grey-form">
+		<div id="noticeArea">
+			<% if flash[:notice] %>
+			  <div class="info-box alert-danger">
+				<a href="#" class="close" data-dismiss="alert">
+			    	&times;
+				</a>
+				<span><%= flash[:notice] %></span>
+			</div>
+			<% end %>
+		</div><br/>	
+		<%= form_for @user, url: users_update_phone_path, method: "post" do |f| %>
+		<div>
+	  		<div class="col-sm-4 pull-left no-padding"></div>
+	  		<div class="col-xs-12 col-sm-4 pull-left no-padding" id="phoneArea" data-toggle="tooltip" title="请输入正确的手机号！" data-placement="top" data-animation="true" data-trigger="manual">	
+	  			<%= f.phone_field :new_phone, autofocus: true, :class => "form-control pull-left",:id => "phoneInput", :placeholder => "新手机号"%>
+	  		</div>
+	  		<div class="clearfix"></div>
+		</div>
+		<br />
+	  
+		<div>
+	  		<div class="col-sm-4 pull-left no-padding"></div>
+	  		<div class="col-xs-12 col-sm-4 pull-left no-padding" id="validCodeArea" data-toggle="tooltip" title="请输入验证码！" data-placement="bottom" data-animation="true" data-trigger="manual">	
+				<%= f.text_field :valid_code, :class => "form-control",:id => "validCodeInput", autocomplete: "off", "ng-model" => "currentValidCode", :placeholder => "验证码", :maxlength => 6 %>
+				<button type="button" id="countDownBtn" class="login-valid pull-left col-xs-2 col-sm-2" onclick="getValidCodeByNewPhone();">获取</button>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<br />
+			
+		<div>
+	  		<div class="col-sm-4 pull-left no-padding"></div>
+			<div class="col-xs-12 col-sm-4 pull-left no-padding">
+				<%= f.submit "提交",:class => "login-submit form-control",:onclick => "return signInValidate()" %>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+		<% end %>
+	</div>
+</div>
+<script>
+	
+</script>

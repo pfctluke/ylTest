@@ -1,0 +1,27 @@
+<div class="container news-container xs-no-padding">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>教练</span>
+		</div>
+	</div>
+	<div class="coaches-module-container">
+		<% @users.each do |user| %>
+		<div class="col-xs-4 col-sm-3 col-md-2 club-module" style="padding: 3% 2%;">
+			<div class="coaches-module-image">
+				<%= image_tag user.profile_picture.url(:small), onerror:'this.src="/assets/default_club.png"'%>
+			</div>
+			<div class="coaches-module-name">
+				<%if user.full_name.present?%>
+					<div class="coaches-module-name"><%=user.full_name%></div>
+				<%else%>
+					<div class="coaches-module-name">暂无</div>
+				<%end%>
+			</div>
+		</div>
+		<%end%>
+		<div class="clearfix"></div>
+	</div>
+	<div class="footer">
+		<%= will_paginate @users, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>
+	</div>
+</div>

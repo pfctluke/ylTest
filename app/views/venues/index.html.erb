@@ -1,0 +1,29 @@
+<div class="container news-container xs-no-padding">
+	<div class="module-title">
+		<div class="module-title-container">
+			<span>场馆</span>
+		</div>
+	</div>
+	<div class="venues-module-container">
+		<% @venues.each do |venue| %>
+		<a href="<%= venue_path(venue)%>">
+			<div class="col-xs-4 col-sm-3 col-md-2 venue-module">
+				<div class="venue-module-image">
+					<%if venue.venue_images.present?%>
+					<%= image_tag venue.venue_images.first.image.url(:thumb), onerror:'this.src="/assets/default_venue.png"'%>
+					<%else%>
+					<%= image_tag venue.logo.url, onerror:'this.src="/assets/default_venue.png"'%>
+					<%end%>
+				</div>
+				<div class="venue-module-name">
+					<%= venue.name%>
+				</div>
+			</div> 
+		</a>
+		<% end %>
+		<div class="clearfix"></div>
+	</div>
+	<div class="footer">
+		<%= will_paginate @venues, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>
+	</div>
+</div>

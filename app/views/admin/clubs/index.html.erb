@@ -1,0 +1,55 @@
+<div id="admin-container"class="admin-container" data-type="clubs">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="well with-header with-footer">
+			<div class="header bg-blue"><%=((@title.blank?)?"":@title) %></div>
+			<table class="table table-hover">
+				<thead class="bordered-darkorange">
+					<tr>
+						<th>#</th>
+						<th>俱乐部名称</th>
+						<th>俱乐部负责人</th>
+						<th>俱乐部联系电话</th>
+						<th>创建时间</th>
+						<th>状态</th>
+						<th style="min-width: 60px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+				<% @clubs.each do |club| %>
+					<tr>
+						<td><%= club.id %></td>
+						<td><%= club.name %></td>
+						<%@user = club.users.where('club_user_relationships.permission' => 0).first%>
+						<% if @user.present? %>
+							<td><%= @user.full_name %></td>
+						<% else %>
+							<td></td>
+						<% end %>
+						<td><%= club.phone %></td>
+						<td><%= club.created_at%></td>
+						<td>
+							<div class="dropdown">
+							  <button class="btn btn-default dropdown-toggle waves-effect waves-light" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style="color: #444;">
+							    <%=club.show_status%>
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/clubs/<%=club.id%>/updateStatus?status=1">审核</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/clubs/<%=club.id%>/updateStatus?status=2">通过</a></li>
+							    <li role="presentation"><a role="menuitem" tabindex="-1" href="/admin/clubs/<%=club.id%>/updateStatus?status=3">拒绝</a></li>
+							  </ul>
+							</div>
+						</td>
+						<td>
+							<%= link_to '', admin_club_path(club), method: :delete, data: { confirm: '确定删除?' }, :class => "icon-trash2 icon-delete" %>
+						</td>
+					</tr>
+				<% end%>
+				</tbody>
+			</table>
+			<div class="footer">
+				<%= will_paginate @clubs, :container => false, :previous_label => '<span>上一页</span>', :next_label=> '<span>下一页</span>' %>  
+			</div>
+		</div>
+	</div>
+</div>

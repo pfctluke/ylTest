@@ -1,0 +1,66 @@
+<div id="sidebar" class="page-sidebar">
+	<!--<div class="sidebar-header-wrapper">
+		<input class="searchinput" type="text">
+		<i class="searchicon fa fa-search"></i>
+		<div class="searchhelper">
+			Search Reports, Charts, Emails or Notifications
+		</div>
+	</div>-->
+	<!-- 0:用户管理；1：新闻管理；2：帖子管理；3；场馆刮泥；4：俱乐部管理；5：头图管理; 6: 专题管理; 7:赛事管理 -->
+	<ul class="nav sidebar-menu">
+		<li id="users" class="">
+			<a href="<%=admin_users_path %>">
+				<i class="menu-icon icon-users"></i> 
+				<span class="menu-text"> 用户管理 </span> 
+			</a>
+		</li>
+		<li id="news" class="">
+			<a href="<%=admin_news_index_path %>">
+				<i class="menu-icon icon-newspaper"></i>
+				<span class="menu-text"> 新闻管理 </span>
+			</a>
+		</li>
+		<li id="messages">
+			<a href="<%= admin_messages_path %>">
+				<i class="menu-icon icon-camera"></i>
+				<span class="menu-text"> 帖子管理 </span>
+			</a>
+		</li>
+		<li id="venues">
+			<a href="<%= admin_venues_path%>">
+				<i class="menu-icon icon-office"></i>
+				<span class="menu-text"> 场馆管理 </span>
+			</a>
+		</li>
+		<li id="clubs">
+			<a href="<%=admin_clubs_path %>">
+				<i class="menu-icon icon-flag"></i>
+				<span class="menu-text"> 俱乐部管理 </span>
+			</a>
+		</li>
+		<li id="carousels">
+			<a href="<%=admin_carousels_path %>">
+				<i class="menu-icon icon-images"></i>
+				<span class="menu-text"> 头图管理 </span>
+			</a>
+		</li>
+		<li id="topics">
+			<a href="<%=admin_topics_path %>">
+				<i class="menu-icon icon-newspaper2"></i>
+				<span class="menu-text"> 专题管理 </span>
+			</a>
+		</li> 
+		<li id="competitions">
+			<a href="<%=admin_competitions_path %>">
+				<i class="menu-icon icon-tree"></i>
+				<span class="menu-text"> 赛事管理 </span>
+			</a>
+		</li> 
+		<li id="orders">
+			<a href="<%=admin_orders_path %>">
+				<i class="menu-icon icon-ticket2"></i>
+				<span class="menu-text"> 缴费管理 </span>
+			</a>
+		</li> 
+	</ul>
+</div>

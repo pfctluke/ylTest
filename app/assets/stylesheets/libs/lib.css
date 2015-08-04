@@ -1,0 +1,200 @@
+/**
+ * 	swipe
+ */
+.swipe{
+	overflow: hidden;
+	visibility: hidden;
+	position: relative;
+}
+.swipe-wrap{
+	overflow: hidden;
+	position: relative;
+}
+.swipe-wrap div{
+	float: left;
+	width: 100%;
+	position: relative;
+}
+.swipe-wrap img{
+	width:100%;
+}
+.swipe-pagination{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	z-index: 930725;
+}
+.swipe-pagination li{
+	display: inline-block;
+}
+.swipe-left, .swipe-right{
+	top: 40%;
+	width: 5%;
+	height: 100%;
+	position: absolute;
+}
+.swipe-left{
+	background: url("/assets/arrow_left.png") no-repeat left top / 100% auto;
+}
+.swipe-right{
+	background: url("/assets/arrow_right.png") no-repeat left top / 100% auto;
+}
+.arrow-left{
+	background: url("/assets/arrow_left.png") no-repeat left top / 100% auto;
+	width: 3%;
+	height: 7%;
+	position: absolute;
+	left: 1%;
+	top: 46.5%;
+	z-index: 930725;
+}
+.arrow-right{
+	background: url("/assets/arrow_right.png") no-repeat left top / 100% auto;
+	width: 3%;
+	height: 7%;
+	position: absolute;
+	right: 1%;
+	top: 46.5%;
+	z-index: 930725;
+}
+.swiper-wrapper img{
+	width: 100%;
+}
+.swipeNav {
+    bottom: 3px;
+    position: absolute;
+    width: 100%;
+}
+.swipeNav #dots{
+	list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+.swipeNav #dots li{
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 10px;
+	background: #ffffff;
+	opacity: 0.4;
+	margin: 0 2px;
+	cursor: pointer;
+}
+.swipeNav #dots li.on{
+	background-color:#ffffff;
+	opacity: 1;
+}
+.swipe-direction-nav {margin: 0; padding: 0; list-style: none;}
+.swipe-direction-nav a  { text-decoration:none; display: block; width: 40px; height: 40px; margin: -20px 0 0; position: absolute; top: 50%; z-index: 10; overflow: hidden; opacity: 0; cursor: pointer; color: rgba(0,0,0,0.8); text-shadow: 1px 1px 0 rgba(255,255,255,0.3); -webkit-transition: all .3s ease; -moz-transition: all .3s ease; transition: all .3s ease; }
+.swipe-direction-nav .swipe-prev { left: -50px; }
+.swipe-direction-nav .swipe-next { right: -50px; text-align: right; }
+.swipe:hover .swipe-prev { opacity: 0.7; left: 10px; }
+.swipe:hover .swipe-next { opacity: 0.7; right: 10px; }
+
+.swipe:hover .swipe-prev { opacity: 0.7; left: 8px; }
+.swipe:hover .swipe-next { opacity: 0.7; right: 8px; }
+.swipe:hover .swipe-next:hover, .swipe:hover .swipe-prev:hover { opacity: 1; }
+.swipe-direction-nav .swipe-disabled { opacity: 0!important; filter:alpha(opacity=0); cursor: default; }
+
+.swipe-direction-nav a:before  {color:#fff; font-family: "icomoon"; font-size: 38px; line-height:1; display: inline-block; content: '\e604'; }
+.swipe-direction-nav a.swipe-next:before  { content: '\e605'; }
+
+.swipe *{
+	transition: transform;
+	-moz-transition: transform;	/* Firefox 4 */
+	-webkit-transition: transform;	/* Safari 和 Chrome */
+	-o-transition: transform;	/* Opera */
+}
+
+/* Masonry */
+.masonry{
+	margin-top: 10px;	
+}
+
+/* 写我们自己的css类 */
+img{
+    max-width: 100%;
+}
+.no-padding{
+	padding:0;
+}
+.pointer{
+	cursor: pointer;
+}
+.single-click{
+	background: #FFFFFF;
+}
+.single-click[disabled]{
+	cursor:wait;
+}
+.yl-loading-bg{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: #000;
+	opacity: 0.6;
+	z-index: 1999;
+}
+.yl-loading-img{
+	margin-top: -25px;
+	margin-left: -25px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+	z-index: 2000;
+	animation: yl-loading 0.8s;
+	-moz-animation: yl-loading 0.8s;
+	-webkit-animation: yl-loading 0.8s;
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	-webkit-animation-timing-function: linear;
+}
+.yl-loading{
+	display:none;
+}
+.flybox{
+    box-shadow: 0px 2px 4px -1px rgb(0, 0, 0);
+    opacity: 0.9;
+    border: none !important;
+    padding-bottom: 10px;
+    transition: margin-top ease 0.3s, box-shadow ease 0.3s, opacity ease 0.3s;
+    -moz-transition: margin-top ease 0.3s, box-shadow ease 0.3s, opacity ease 0.3s;
+    -webkit-transition: margin-top ease 0.3s, box-shadow ease 0.3s, opacity ease 0.3s;
+    -o-transition: margin-top ease 0.3s, box-shadow ease 0.3s, opacity ease 0.3s;
+}
+.flybox:hover{
+    box-shadow: 0 26px 25px -18px #1a1a1a;
+    margin-top: -5px;
+    opacity: 1;
+}
+@-webkit-keyframes yl-loading{
+	0%   {
+			transform:rotate(0deg);
+			-webkit-transform:rotate(0deg);
+		}
+	100% {
+			transform:rotate(360deg);
+			-webkit-transform:rotate(360deg);
+		}
+}
+@keyframes yl-loading{
+	0%   {
+			transform:rotate(0deg);
+			-ms-transform:rotate(0deg); 	/* IE 9 */
+			-moz-transform:rotate(0deg); 	/* Firefox */
+			-webkit-transform:rotate(0deg); /* Safari 和 Chrome */
+			-o-transform:rotate(0deg); 	/* Opera */
+		}
+	100% {
+			transform:rotate(360deg);
+			-ms-transform:rotate(360deg); 	/* IE 9 */
+			-moz-transform:rotate(360deg); 	/* Firefox */
+			-webkit-transform:rotate(360deg); /* Safari 和 Chrome */
+			-o-transform:rotate(360deg); 	/* Opera */
+		}
+}
